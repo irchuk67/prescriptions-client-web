@@ -1,0 +1,23 @@
+.button{
+  border: none;
+  padding: 1rem;
+  background-color: #ABFCCDFF;
+  border-radius: .5rem;
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+  transition: all .3s;
+  & .rotating-star{
+    margin: 0 .5rem;
+    font-size: 1.5rem;
+    transition: all 2s;
+  }
+
+  &:hover{
+    background-color: #a0ffc7;
+    & .rotating-star{
+      transform: rotate(90deg);
+    }
+  }
+}
+
+

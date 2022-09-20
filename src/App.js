@@ -1,20 +1,32 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {getReceipts} from "./api";
-
+import React, {useState} from "react";
+import ReceiptsList from "./components/receipts-list/receiptsList";
+import './base.scss';
+import Button from "./components/button/button";
 
 const App = () => {
-    const [receipts, setReceipts] = useState([]);
+    const [isListOpened, setIsListOpened] = useState(false);
 
-    useEffect(() => {
-            getReceipts().then(res => setReceipts(res.data));
-        }, []
-    )
-
-    const receiptList = receipts.map(receipt => <div key={receipt.id}>{receipt.text}</div>)
+    const onButtonClick = () => {
+        setIsListOpened(!isListOpened)
+    }
     return (
-        <div>
-            {receiptList}
+        <div className={'container'}>
+            <Button onButtonClick={onButtonClick}>
+                {isListOpened ?
+                    <div>
+                        <p>
+                            hide receipts
+                        </p>
+                    </div>
+                    :
+                    <div>
+                        <p>
+                            Show all receipts
+                        </p>
+                    </div>
+                }
+            </Button>
+            {isListOpened ? <ReceiptsList/> : null}
         </div>)
 }
 
