@@ -1,0 +1,51 @@
+.dialog{
+  width: 100%;
+}
+.new-receipt-form{
+  &__wrapper{
+    padding: 3.5rem;
+    width: 45rem;
+    overflow: hidden;
+  }
+  &__heading{
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+  }
+
+  &__form{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input{
+    border: none;
+    border-radius: .5rem;
+    height: 3rem;
+    box-shadow: 0 .4rem 2rem rgba(black, .2);
+    padding: .5rem;
+    &:focus-visible{
+      outline: none;
+      box-shadow: 0 .4rem 2rem rgba(#a2a2ff, .6);;
+    }
+  }
+
+  &__label{
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  &__buttons{
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__button{
+    &:not(:last-child){
+      margin-right: 1rem;
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+}

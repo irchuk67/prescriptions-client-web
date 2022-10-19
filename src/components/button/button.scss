@@ -1,23 +1,48 @@
 .button{
   border: none;
   padding: 1rem;
-  background-color: #ABFCCDFF;
   border-radius: .5rem;
   text-transform: capitalize;
   margin-bottom: 1rem;
   transition: all .3s;
-  & .rotating-star{
-    margin: 0 .5rem;
-    font-size: 1.5rem;
-    transition: all 2s;
+
+  &:focus-visible{
+    outline: none;
+  }
+  &:visited{
+    text-decoration: none;
+    color: inherit;
+  }
+  &:focus{
+    color: inherit;
   }
 
-  &:hover{
-    background-color: #a0ffc7;
-    & .rotating-star{
-      transform: rotate(90deg);
+  button:active {
+    transform: scale(0.99);
+  }
+
+  &__green{
+    background-color: #ABFCCDFF;
+    &:hover, &:focus{
+      background-color: #8dfdb8;
+    }
+  }
+
+  &__pink{
+    background-color: #fcabe0;
+    &:hover, &:focus{
+      background-color: #ff4bc0;
+    }
+  }
+
+  &__lavender{
+    background-color: lavender;
+    &:hover, &:focus{
+      background-color: #e1e1fa;
     }
   }
 }
+
+
 
 

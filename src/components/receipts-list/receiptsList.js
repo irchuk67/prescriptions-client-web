@@ -1,24 +1,50 @@
 import React, {useEffect, useState} from "react";
-import {getReceipts} from "../../api";
+import {deleteReceiptById, getReceipts} from "../../api";
 import ReceiptItem from "../receipt-item/receiptItem";
 import './receiptsList.scss';
+import {Dialog, Alert, AlertTitle} from "@mui/material";
+import {connect} from "react-redux";
+import {deleteReceiptByID, getAllReceipts, openUpdateForm} from "../../redux/actions";
 
-const ReceiptsList = () => {
-    const [receipts, setReceipts] = useState([]);
+const ReceiptsList = (props) => {
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-    useEffect(() => {
-            getReceipts().then(res => setReceipts(res.data));
-        }, []
-    )
+    const handleClose = () => {
+        setIsDialogOpen(!isDialogOpen)
+    }
 
-    const receiptList = receipts.map(receipt => <ReceiptItem key={receipt.id} text={receipt.text}/>);
+    const onReceiptDelete = (id) => props.deleteReceiptByID(id);
 
-    return(
+    console.log(props.receipts)
+    const receiptList = props.receipts.map(receipt => {
+        return (<ReceiptItem key={receipt.id}
+                     text={receipt.text}
+                     onItemDelete={onReceiptDelete}
+                     id={receipt.id}
+        />)
+    });
+
+    return (
         <div className={'receipts-list'}>
             <h1 className={'receipts-list__heading'}>Receipts list</h1>
             {receiptList}
+            <Dialog
+                open={isDialogOpen}
+                onClose={handleClose}
+            >
+                <Alert severity="error" id={'alert-window'}>
+                    <AlertTitle>Error</AlertTitle>
+                    Something went wrong!!! Item wasn`t deleted
+                </Alert>
+            </Dialog>
         </div>
     )
 }
 
-export default ReceiptsList;
+const mapStateToProps = state => {
+    return {
+        receipts: state.receipts
+    }
+}
+
+export default connect(mapStateToProps, {getAllReceipts, deleteReceiptByID, openUpdateForm})(ReceiptsList);
