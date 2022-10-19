@@ -7,19 +7,21 @@ import {connect} from "react-redux";
 import {addNewReceipt} from "../../redux/actions";
 import {Field, reduxForm} from "redux-form";
 
+const renderInput = ({input, label}) => {
+    return(
+        <div className={'new-receipt-form__form'}
+        >
+            <label htmlFor="receiptText" className={'new-receipt-form__label'}>{label}</label>
+            <input {...input} id={'receiptText'} className={'new-receipt-form__input'}/>
+        </div>
+    )
+}
+
 const Form = (props) => {
     function onFormSubmit (formValues) {
         props.onSubmitPress(formValues);
     }
-    const renderInput = ({input, label}) => {
-        return(
-            <div className={'new-receipt-form__form'}
-            >
-                <label htmlFor="receiptText" className={'new-receipt-form__label'}>{label}</label>
-                <input {...input} id={'receiptText'} className={'new-receipt-form__input'}/>
-            </div>
-        )
-    }
+
     return (
         <Dialog open={props.isOpen || false} onClose={props.onFormClose} className={'dialog'}>
             <div className={'new-receipt-form__wrapper'}>
