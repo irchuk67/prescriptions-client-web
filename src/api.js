@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const baseURL = 'https://receipts-server.herokuapp.com/api';
-const baseLocalhost = 'http://localhost:8000/api';
+const baseURL = 'http://ec2-52-206-170-81.compute-1.amazonaws.com:5000/api';
+const baseLocalhost = 'http://localhost:5000/api';
 const Server = axios.create({
-    baseURL: baseURL
+    baseURL: baseLocalhost
 });
 
 const getReceipts = async () => await Server.get('/receipts');

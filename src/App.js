@@ -13,9 +13,7 @@ const App = (props) => {
 
     const onOpenListClick = () => {
         setIsListOpened(!isListOpened)
-        if(props.receipts.length === 0){
-            props.getAllReceipts();
-        }
+        props.getAllReceipts();
     }
 
     return (

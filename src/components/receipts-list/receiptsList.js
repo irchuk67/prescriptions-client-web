@@ -15,7 +15,6 @@ const ReceiptsList = (props) => {
 
     const onReceiptDelete = (id) => props.deleteReceiptByID(id);
 
-    console.log(props.receipts)
     const receiptList = props.receipts.map(receipt => {
         return (<ReceiptItem key={receipt.id}
                      text={receipt.text}

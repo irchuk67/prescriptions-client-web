@@ -20,7 +20,8 @@ const AddReceipt = (props) => {
 
 const mapStateToProps = state => {
     return{
-        isOpen: state.isAddFormOpen
+        isOpen: state.isAddFormOpen,
+        receipts: state.receipts
     }
 }
 export default connect(mapStateToProps, {addNewReceipt, closeAddForm})(AddReceipt);

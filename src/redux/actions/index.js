@@ -11,7 +11,6 @@ import {
 
 const getAllReceipts = () => async dispatch => {
     const receipts = await getReceipts();
-    console.log(receipts.data)
     dispatch({
         type: GET_ALL_RECEIPTS,
         payload: receipts.data
@@ -28,10 +27,9 @@ const deleteReceiptByID = (id) => async dispatch => {
 
 const addNewReceipt = (text) => async dispatch => {
     const result = await createReceipt(text);
-    console.log(JSON.stringify(result.data.receipt))
     dispatch({
         type: ADD_RECEIPT,
-        payload: result.data.receipt
+        payload: result.data
     })
 }
 

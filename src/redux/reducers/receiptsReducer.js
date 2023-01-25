@@ -5,7 +5,7 @@ const INITIAL_STATE = []
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case GET_ALL_RECEIPTS:
-            return [...state, ...action.payload]
+            return action.payload
         case DELETE_RECEIPT:
             return state.filter(receipt => receipt.id !== action.payload)
         case ADD_RECEIPT:
