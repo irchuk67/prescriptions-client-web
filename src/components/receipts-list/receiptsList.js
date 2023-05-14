@@ -1,31 +1,31 @@
 import React, {useEffect, useState} from "react";
-import {deleteReceiptById, getReceipts} from "../../api";
-import ReceiptItem from "../receipt-item/receiptItem";
+import {deletePrescriptionById, getPrescriptions, getUserDataByToken} from "../../api";
+import PrescriptionItem from "../receipt-item/receiptItem";
 import './receiptsList.scss';
 import {Dialog, Alert, AlertTitle} from "@mui/material";
 import {connect} from "react-redux";
-import {deleteReceiptByID, getAllReceipts, openUpdateForm} from "../../redux/actions";
+import {deletePrescriptionByID, getAllPrescriptions, openUpdateForm} from "../../redux/actions";
 
-const ReceiptsList = (props) => {
+const PrescriptionsList = (props) => {
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     const handleClose = () => {
         setIsDialogOpen(!isDialogOpen)
     }
 
-    const onReceiptDelete = (id) => props.deleteReceiptByID(id);
+    const onPrescriptionDelete = (id) => props.deletePrescriptionByID(id);
 
     const receiptList = props.receipts.map(receipt => {
-        return (<ReceiptItem key={receipt.id}
+        return (<PrescriptionItem key={receipt.id}
                      text={receipt.text}
-                     onItemDelete={onReceiptDelete}
+                     onItemDelete={onPrescriptionDelete}
                      id={receipt.id}
         />)
     });
 
     return (
         <div className={'receipts-list'}>
-            <h1 className={'receipts-list__heading'}>Receipts list</h1>
+            <h1 className={'receipts-list__heading'}>Prescriptions list</h1>
             {receiptList}
             <Dialog
                 open={isDialogOpen}
@@ -42,8 +42,9 @@ const ReceiptsList = (props) => {
 
 const mapStateToProps = state => {
     return {
-        receipts: state.receipts
+        receipts: state.receipts,
+        token: state.token
     }
 }
 
-export default connect(mapStateToProps, {getAllReceipts, deleteReceiptByID, openUpdateForm})(ReceiptsList);
+export default connect(mapStateToProps, {getAllPrescriptions: getAllPrescriptions, deletePrescriptionByID, openUpdateForm})(PrescriptionsList);

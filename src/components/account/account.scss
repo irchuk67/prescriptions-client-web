@@ -1,0 +1,94 @@
+.account {
+  display: flex;
+  flex-direction: column;
+
+  &__back-button {
+    &,
+    &:link,
+    &:visited {
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: black;
+    }
+
+    & > span {
+      margin-right: .5rem;
+    }
+  }
+
+  &__data {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    /*    align-items: center;*/
+    width: 40%;
+
+  }
+
+  &__personal-info {
+    display: flex;
+    align-items: center;
+
+    &--data {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin-left: 1.5rem;
+
+      & > h3 {
+        font-size: 1.8rem;
+      }
+
+      & > p {
+        font-size: 1.4rem;
+        color: #7c7c83;
+      }
+    }
+  }
+
+  &__field {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 0;
+    border-bottom: black 1px solid;
+
+    &:not(:last-child) {
+      margin-top: .5rem;
+    }
+
+    &--naming {
+      display: flex;
+      align-items: center;
+    }
+
+    &--img {
+      width: 3rem;
+      height: 3rem;
+      margin-right: 1rem;
+    }
+
+    &--name {
+      font-size: 1.6rem;
+    }
+
+    &--value {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.log-out {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 5rem;
+
+  font-size: 3rem;
+  font-weight: bold;
+
+  & > img {
+    margin-right: 1rem;
+  }
+
+}

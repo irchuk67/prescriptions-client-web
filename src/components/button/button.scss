@@ -41,6 +41,31 @@
       background-color: #e1e1fa;
     }
   }
+
+  &__white{
+    background: white;
+    &--lavender{
+      color: #acacfc;
+      &:hover, &:focus{
+        background: #acacfc;
+        color: #ffffff;
+      }
+    }
+    &--green{
+      color: #5ae3a6;
+      &:hover, &:focus{
+        background: #5ae3a6;
+        color: #ffffff;
+      }
+    }
+    &--gray{
+      color: #7c7c83;
+      &:hover, &:focus{
+        background: #7c7c83;
+        color: #ffffff;
+      }
+    }
+  }
 }
 
 

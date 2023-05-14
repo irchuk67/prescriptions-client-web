@@ -1,10 +1,10 @@
-import Form from "../form/form";
+import Form from "../dialog-form/dialog-form";
 import {connect} from "react-redux";
-import {editReceipt, closeUpdateForm} from "../../redux/actions";
+import {editPrescription, closeUpdateForm} from "../../redux/actions";
 
-const UpdateReceipt = (props) => {
+const UpdatePrescription = (props) => {
     const onFormSubmit = (formValues) => {
-        props.updateReceipt(props.id, formValues.receiptText);
+        props.updatePrescription(props.id, formValues.receiptText);
         props.closeUpdateForm();
     }
     return(
@@ -27,4 +27,4 @@ const mapStateToProps = state => {
         id: state.isUpdateFormOpen.id
     }
 }
-export default connect(mapStateToProps, {updateReceipt: editReceipt, closeUpdateForm})(UpdateReceipt);
+export default connect(mapStateToProps, {updatePrescription: editPrescription, closeUpdateForm})(UpdatePrescription);

@@ -1,40 +1,37 @@
 import React, {useEffect, useState} from "react";
 import {Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import Button from '../button/button.js'
-import {createReceipt} from "../../api";
-import './form.scss';
-import {connect} from "react-redux";
-import {addNewReceipt} from "../../redux/actions";
+import './dialog-form.scss';
 import {Field, reduxForm} from "redux-form";
 
 const renderInput = ({input, label}) => {
     return(
-        <div className={'new-receipt-form__form'}
+        <div className={'new-form__field'}
         >
-            <label htmlFor="receiptText" className={'new-receipt-form__label'}>{label}</label>
-            <input {...input} id={'receiptText'} className={'new-receipt-form__input'}/>
+            <label htmlFor="receiptText" className={'new-form__label'}>{label}</label>
+            <input {...input} id={'receiptText'} className={'new-form__input'}/>
         </div>
     )
 }
 
-const Form = (props) => {
+const DialogForm = (props) => {
     function onFormSubmit (formValues) {
         props.onSubmitPress(formValues);
     }
 
     return (
         <Dialog open={props.isOpen || false} onClose={props.onFormClose} className={'dialog'}>
-            <div className={'new-receipt-form__wrapper'}>
-                <h3 className={'new-receipt-form__heading'}>{props.title}</h3>
-                <form className={'new-receipt-form'} onSubmit={props.handleSubmit(onFormSubmit)}>
+            <div className={'new-form__wrapper'}>
+                <h3 className={'new-form__heading'}>{props.title}</h3>
+                <form className={'new-form'} onSubmit={props.handleSubmit(onFormSubmit)}>
 
                     <Field name={'receiptText'}
                            component={renderInput}
                            label={props.label}
                     />
-                    <div className={'new-receipt-form__buttons'}>
-                        <Button className={'button button__green new-receipt-form__button'}>{props.buttonText}</Button>
-                        <Button className={'button button__lavender new-receipt-form__button'}
+                    <div className={'new-form__buttons'}>
+                        <Button className={'button button__green new-form__button'}>{props.buttonText}</Button>
+                        <Button className={'button button__lavender new-form__button'}
                                 onButtonClick={(event) => {
                                     event.preventDefault();
                                     props.onFormClose()
@@ -50,4 +47,4 @@ const Form = (props) => {
 export default reduxForm({
     form: 'receiptForm',
     enableReinitialize: true
-})(Form);
+})(DialogForm);

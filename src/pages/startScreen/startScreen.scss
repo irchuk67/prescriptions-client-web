@@ -1,0 +1,29 @@
+.start {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  overflow: hidden;
+  &__col-1 {
+    background-image: url("../../assets/start-screen.jpg");
+    background-size: cover;
+  }
+
+  &__col-2{
+    background-image: linear-gradient(to right bottom, #ABFCCD, #D0D0FF);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > img{
+      width: 10rem;
+      margin-bottom: 2.5rem;
+    }
+    & > button{
+      width: 25%;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+}

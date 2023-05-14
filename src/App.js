@@ -1,55 +1,53 @@
 import React, {useEffect, useRef, useState} from "react";
-import ReceiptsList from "./components/receipts-list/receiptsList";
 import './base.scss';
-import Button from "./components/button/button";
-import Form from "./components/form/form";
 import {connect} from "react-redux";
-import {getAllReceipts, openAddForm} from "./redux/actions";
-import AddReceipt from "./components/addReceipt/addReceipt";
-import UpdateReceipt from "./components/updateReceipt/updateReceipt";
+import {getAllPrescriptions, openAddForm} from "./redux/actions";
+import StartScreen from "./pages/startScreen/startScreen";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import MainScreen from "./pages/mainScreen/mainScreen";
+import Patient from "./pages/patient/patient";
+import PatientAccount from "./pages/patient/patientAccount";
+import DoctorsList from "./components/doctorsList/doctorsList";
+import Doctor from "./pages/doctor/doctor";
 
 const App = (props) => {
-    const [isListOpened, setIsListOpened] = useState(false);
-
-    const onOpenListClick = () => {
-        setIsListOpened(!isListOpened)
-        props.getAllReceipts();
-    }
-
+    const token = localStorage.getItem('token');
+    const role = JSON.parse(localStorage.getItem('currentUser')).role;
     return (
-        <div className={'container'}>
-            <div className={'buttons'}>
-                <Button onButtonClick={() => onOpenListClick()} className={'button button__green'}>
-                    {isListOpened ?
-                        <div>
-                            <p>
-                                hide receipts
-                            </p>
-                        </div>
-                        :
-                        <div>
-                            <p>
-                                Show all receipts
-                            </p>
-                        </div>
-                    }
-                </Button>
-                <Button onButtonClick={() => props.openAddForm()} className={'button button__pink'}>
-                    Add receipt
-                </Button>
-            </div>
-            {isListOpened ? <ReceiptsList/> : null}
-            {props.isAddFormOpened ? <AddReceipt/> : null}
-            <UpdateReceipt/>
-        </div>)
+        <BrowserRouter>
+            <Routes>
+                <Route path={'/'} element={<StartScreen/>}/>
+                <Route path={'/patient/*'} element={
+                    <ProtectedRoute token={token}
+                                    allowed={role === 'patient'}>
+                        <Patient/>
+                    </ProtectedRoute>}/>
+                <Route path={'/doctor/*'} element={
+                    <ProtectedRoute token={token}
+                                    allowed={role === 'doctor'}>
+                        <Doctor/>
+                    </ProtectedRoute>}/>
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
+
+const ProtectedRoute = ({ token, allowed, children }) => {
+    if (!token || !allowed) {
+        return <Navigate to="/" replace />;
+    }
+
+    return children;
+};
 const mapStateToProps = state => {
-    return{
-        receipts : state.receipts,
+    return {
+        receipts: state.receipts,
         isAddFormOpened: state.isAddFormOpen,
-        isUpdateFormOpened: state.isUpdateFormOpen
+        isUpdateFormOpened: state.isUpdateFormOpen,
+        token: state.token,
+        userRole: state.currentUserData.role
     }
 }
 
-export default connect(mapStateToProps, {getAllReceipts, openAddForm})(App)
+export default connect(mapStateToProps, {getAllReceipts: getAllPrescriptions, openAddForm})(App)

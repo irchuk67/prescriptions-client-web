@@ -1,0 +1,52 @@
+.sort-form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  z-index: 400;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  padding: 2rem;
+
+  & > h3{
+    font-size: 2rem;
+  }
+
+  &__content{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__fields{
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin: 1.5rem 0;
+    border-radius: .5rem;
+    padding: 1.5rem 2rem 2rem 1.5rem;
+
+    background-color: #d0d0ff;
+  }
+
+  &__name{
+    font-size: 1.8rem;
+    text-transform: capitalize;
+  }
+
+  &__button{
+    width: 25%;
+  }
+}
