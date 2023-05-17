@@ -30,5 +30,7 @@ const DialogForm = (props) => {
 export default reduxForm({
     form: 'receiptForm',
     enableReinitialize: true,
+    destroyOnUnmount: false,
+    keepDirtyOnReinitialize: true,
     validate
 })(DialogForm);
