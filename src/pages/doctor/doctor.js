@@ -6,6 +6,7 @@ import DoctorAccount from "./doctorAccount";
 import PatientsList from "../../components/patientsList/patientsList";
 import './doctor.scss';
 import PatientItem from "../../components/patientItem/patientItem";
+import PatientAccountForDoctor from "../../components/patientAccountForDoctor/patientAccountForDoctor";
 const Doctor = () => {
     return (
         <Routes>
@@ -18,7 +19,7 @@ const Doctor = () => {
                     </NavLink>
                     <Routes>
                         <Route path={'/'} element={<PatientsList/>}/>
-                        <Route path={'/*'} element={<PatientItem/>}/>
+                        <Route path={'/:userId/*'} element={<PatientItem/>}/>
                     </Routes>
                 </div>
             }/>

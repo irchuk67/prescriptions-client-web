@@ -7,11 +7,7 @@ import {cleanCurrentUserData, logOut} from "../../redux/actions";
 import BackButton from "../backButton/backButton";
 
 const Account = (props) => {
-    const onLogOut = ( ) => {
-        localStorage.setItem('token', '');
-        props.logOut();
-        props.cleanCurrentUserData();
-    }
+
     return (
         <div className={'account'}>
             <BackButton backPath={props.backPath}/>
@@ -28,7 +24,6 @@ const Account = (props) => {
                         {props.children}
                     </div>
                 </div>
-                <NavLink className={'log-out'} to={'/'} onClick={onLogOut}><img src={logOutIMG} alt={'log out'}/>Log out</NavLink>
             </div>
         </div>
     )

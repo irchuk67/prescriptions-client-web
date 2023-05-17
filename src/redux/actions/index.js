@@ -4,14 +4,28 @@ import {
     createPrescription,
     updatePrescription,
     logInUser,
-    getUserDataByToken, getDoctors, getDoctorPatients
+    getUserDataByToken, getDoctors, getDoctorPatients, getDoctorPatientById
 } from "../../api";
 import {
-    ADD_RECEIPT, CLEAN_CURRENT_USER_DATA,
-    CLOSE_ADD_FORM, CLOSE_AUTH_FORM, CLOSE_MENU, CLOSE_REGISTER_FORM, CLOSE_UPDATE_FORM,
+    ADD_RECEIPT,
+    CLEAN_CURRENT_USER_DATA,
+    CLOSE_ADD_FORM,
+    CLOSE_AUTH_FORM,
+    CLOSE_MENU,
+    CLOSE_REGISTER_FORM,
+    CLOSE_UPDATE_FORM,
     DELETE_RECEIPT,
-    GET_ALL_RECEIPTS, GET_CURRENT_USER_DATA, GET_DOCTORS_LIST, GET_PATIENTS_LIST_FOR_DOCTOR, LOG_IN, LOG_OUT,
-    OPEN_ADD_FORM, OPEN_AUTH_FORM, OPEN_MENU, OPEN_REGISTER_FORM,
+    GET_ALL_RECEIPTS,
+    GET_CURRENT_USER_DATA,
+    GET_DOCTORS_LIST,
+    GET_PATIENT_DATA_FOR_DOCTOR,
+    GET_PATIENTS_LIST_FOR_DOCTOR,
+    LOG_IN,
+    LOG_OUT,
+    OPEN_ADD_FORM,
+    OPEN_AUTH_FORM,
+    OPEN_MENU,
+    OPEN_REGISTER_FORM,
     OPEN_UPDATE_FORM,
     UPDATE_RECEIPT
 } from "../types";
@@ -105,6 +119,16 @@ const getPatientsListForDoctor = (token, searchField, sortField) => async dispat
     console.log(patients.data)
     dispatch({
             type: GET_PATIENTS_LIST_FOR_DOCTOR,
+            payload: patients.data
+        }
+    )
+}
+
+const getPatientForDoctorById = (id, token) => async dispatch => {
+    const patients = await getDoctorPatientById(id, token);
+    console.log(patients.data)
+    dispatch({
+            type: GET_PATIENT_DATA_FOR_DOCTOR,
             payload: patients.data
         }
     )
@@ -220,5 +244,6 @@ export {
     getDoctorsList,
     openMenu,
     closeMenu,
-    getPatientsListForDoctor
+    getPatientsListForDoctor,
+    getPatientForDoctorById
 }

@@ -6,6 +6,8 @@ import email from "../../assets/account.svg";
 import {connect} from "react-redux";
 import specialisation from "../../assets/doctor-male-svgrepo-com 1.svg";
 import patientsList from "../../assets/patient-svgrepo-com 1.svg";
+import {NavLink} from "react-router-dom";
+import logOutIMG from "../../assets/log-out-outlined-svgrepo-com 1.svg";
 
 const renderFields = () => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -54,10 +56,19 @@ const renderFields = () => {
 }
 
 const DoctorAccount = (props) => {
+    const onLogOut = ( ) => {
+        localStorage.setItem('token', '');
+        props.logOut();
+        props.cleanCurrentUserData();
+    }
     return (
-        <Account userData={props.userData} backPath={'/doctor/main'}>
-            {renderFields(props.userData)}
-        </Account>
+        <div className={'personal-account'}>
+            <Account userData={props.userData} backPath={'/doctor/main'}>
+                {renderFields(props.userData)}
+            </Account>
+            <NavLink className={'log-out'} to={'/'} onClick={onLogOut}><img src={logOutIMG} alt={'log out'}/>Log out</NavLink>
+        </div>
+
 
     )
 }

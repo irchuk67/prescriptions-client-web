@@ -8,6 +8,9 @@ import weight from "../../assets/weight-scale 1.svg";
 import callendar from "../../assets/callendar.svg";
 import gender from "../../assets/gender 1.svg";
 import {connect} from "react-redux";
+import {NavLink} from "react-router-dom";
+import logOutIMG from "../../assets/log-out-outlined-svgrepo-com 1.svg";
+import {formatDate} from "../../format";
 
 const renderFields = (userData) => {
     return (
@@ -41,7 +44,7 @@ const renderFields = (userData) => {
                     <img className={'account__field--img'} src={height} alt={'height'}/>
                     <p className={'account__field--name'}>Height: </p>
                 </div>
-                <p className={'account__field--value'}>{userData.height}</p>
+                <p className={'account__field--value'}>{userData.height} sm</p>
             </div>
 
             <div className={'account__field'}>
@@ -49,7 +52,7 @@ const renderFields = (userData) => {
                     <img className={'account__field--img'} src={weight} alt={'weight'}/>
                     <p className={'account__field--name'}>Weight: </p>
                 </div>
-                <p className={'account__field--value'}>{userData.weight}</p>
+                <p className={'account__field--value'}>{userData.weight} kg</p>
             </div>
 
             <div className={'account__field'}>
@@ -57,7 +60,7 @@ const renderFields = (userData) => {
                     <img className={'account__field--img'} src={callendar} alt={'callendar'}/>
                     <p className={'account__field--name'}>Date of birth: </p>
                 </div>
-                <p className={'account__field--value'}>{userData.birthDate}</p>
+                <p className={'account__field--value'}>{formatDate(userData.birthDate)}</p>
             </div>
 
             <div className={'account__field'}>
@@ -72,10 +75,20 @@ const renderFields = (userData) => {
 }
 
 const PatientAccount = (props) => {
+    const onLogOut = ( ) => {
+        localStorage.setItem('token', '');
+        props.logOut();
+        props.cleanCurrentUserData();
+    }
+
     return (
-        <Account userData={props.userData} backPath={'/patient/main'}>
-            {renderFields(props.userData)}
-        </Account>
+        <div className={'personal-account'}>
+            <Account userData={props.userData} backPath={'/patient/main'}>
+                {renderFields(props.userData)}
+            </Account>
+            <NavLink className={'log-out'} to={'/'} onClick={onLogOut}><img src={logOutIMG} alt={'log out'}/>Log out</NavLink>
+        </div>
+
 
     )
 }
@@ -83,7 +96,7 @@ const PatientAccount = (props) => {
 
 const mapStateToProps = state => {
     return {
-        userData: state.currentUserData
+        userData: JSON.parse(localStorage.getItem('currentUser'))
     }
 }
 export default connect(mapStateToProps)(PatientAccount);

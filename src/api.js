@@ -89,6 +89,11 @@ const getDoctorPatients = async (token, searchField= '', sortField = 'name') => 
     }
 })
 
+const getDoctorPatientById = async (patientId, token) => await Server.get(`/users/patient/${patientId}`, {
+    headers: {
+        Authorization: token
+    }
+})
 export {
     getPrescriptions,
     deletePrescriptionById,
@@ -100,5 +105,6 @@ export {
     getUserDataByToken,
     getDoctors,
     updateAssignedDoctors,
-    getDoctorPatients
+    getDoctorPatients,
+    getDoctorPatientById
 }

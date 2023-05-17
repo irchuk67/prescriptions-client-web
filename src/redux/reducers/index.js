@@ -10,6 +10,7 @@ import doctorsReducer from "./doctorsReducer";
 import MenuReducer from "./menuReducer";
 import patientsListReducer from "./patientsListReducer";
 import prescriptionsReducer from "./prescriptionsReducer";
+import viewedUserDataReducer from "./viewedUserDataReducer";
 
 export default combineReducers({
     receipts: prescriptionsReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
     currentUserData: currentUserDataReducer,
     doctors: doctorsReducer,
     isMenuOpen: MenuReducer,
-    patients: patientsListReducer
+    patients: patientsListReducer,
+    viewedPatient: viewedUserDataReducer
 })
