@@ -8,6 +8,7 @@ import search from "../../assets/icons8-search 1.svg";
 import sort from '../../assets/filter 1.svg';
 import SortForm from "../sortForm/sortForm";
 import {updateAssignedDoctors} from "../../api";
+import {NavLink} from "react-router-dom";
 
 const renderDoctors = (doctors, assignedDoctorsLocal, onClick) => {
     return doctors.map(doctor => {
@@ -30,7 +31,7 @@ const renderDoctors = (doctors, assignedDoctorsLocal, onClick) => {
 
 const DoctorsList = (props) => {
     const [doctorSearch, setDoctorSearch] = useState('');
-    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const [isSortOpen, setIsSortOpen] = useState(false);
     const sortFields = ['name', 'surname', 'specialisation'];
     const [sortField, setSortField] = useState('');
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -57,7 +58,7 @@ const DoctorsList = (props) => {
         event.preventDefault()
         const {clinic, clinicAddress} = JSON.parse(localStorage.getItem('currentUser'));
         await props.getDoctorsList(clinic, clinicAddress, localStorage.getItem('token'), doctorSearch, sortField);
-        setIsFilterOpen(false)
+        setIsSortOpen(false)
     }
 
     const onSearchSubmit = async (event) => {
@@ -79,14 +80,14 @@ const DoctorsList = (props) => {
 
     return (
         <React.Fragment>
-            {isFilterOpen
+            {isSortOpen
                 ?
                 <SortForm sortFields={sortFields} onSubmit={onSortFieldSelect} onChange={onSortFieldChange}/>
                 :
                 <div className={'doctors'}>
                     <div className={'doctors__header'}>
                         <h3 className={'doctors__title'}>Doctors</h3>
-                        <Button className={'button button__green doctors__button'}>Go to daily receipts</Button>
+                        <NavLink to={'/patient/main'}><Button className={'button button__green doctors__button'}>Go to daily receipts</Button></NavLink>
                     </div>
 
                     <div className={'doctors__search'}>
@@ -96,7 +97,7 @@ const DoctorsList = (props) => {
                         </form>
                     </div>
 
-                    <div className={'sort'} onClick={() => setIsFilterOpen(true)}>
+                    <div className={'sort'} onClick={() => setIsSortOpen(true)}>
                         <p className="sort__heading">Sort doctors</p>
                         <img src={sort}/>
                     </div>

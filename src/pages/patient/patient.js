@@ -9,7 +9,6 @@ import PatientAccount from "./patientAccount";
 
 const Patient = () => {
     return (
-
         <Routes>
             <Route path={'/account'} element={<PatientAccount/>}/>
             <Route path={'/main/*'} element={

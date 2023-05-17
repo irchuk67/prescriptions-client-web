@@ -7,16 +7,11 @@ export default (state = INITIAL_STATE, action) => {
         case GET_ALL_RECEIPTS:
             return action.payload
         case DELETE_RECEIPT:
-            return state.filter(receipt => receipt.id !== action.payload)
+            return action.payload
         case ADD_RECEIPT:
-            if(state.length === 0){
-                return state
-            }
-            return [...state, action.payload]
+            return action.payload
         case UPDATE_RECEIPT:
-            return state.map(reseipt => {
-                return reseipt.id === action.payload._id ? {id: action.payload._id, text: action.payload.text} : reseipt
-            })
+            return action.payload
         default:
             return state
     }

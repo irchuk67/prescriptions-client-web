@@ -1,0 +1,13 @@
+.patient-item{
+  &__header{
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 5fr repeat(3,1fr);
+    justify-items: flex-end;
+  }
+  &__heading{
+    justify-self: flex-start;
+
+    font-size: 2rem;
+  }
+}

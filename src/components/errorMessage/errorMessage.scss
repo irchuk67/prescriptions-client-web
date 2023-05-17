@@ -1,6 +1,7 @@
 .error-dialog{
   width: 100%;
-
+  z-index: 3000;
+  position: absolute;
   &__wrapper{
     padding: 3.5rem;
     width: 45rem;

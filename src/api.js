@@ -6,8 +6,8 @@ const Server = axios.create({
     baseURL: baseLocalhost
 });
 
-const getPrescriptions = async (token) => await Server.get(
-    '/prescriptions',
+const getPrescriptions = async (token, assigneeId) => await Server.get(
+    `/prescriptions/${assigneeId}`,
     {
         headers: {
             Authorization: token
@@ -32,9 +32,9 @@ const deletePrescriptionById = async (id, token) => await Server.delete(
         }
     }
     );
-const createPrescription = async (text, token) => await Server.post(
+const createPrescription = async (prescription, token) => await Server.post(
     '/prescriptions',
-    {text: text},
+    prescription,
     {
         headers: {
             Authorization: token
@@ -79,6 +79,16 @@ const updateAssignedDoctors = async (userId, doctorId, token) => await Server.pa
     }
 } )
 
+const getDoctorPatients = async (token, searchField= '', sortField = 'name') => await Server.get('/users/patients', {
+    headers: {
+        Authorization: token
+    },
+    params: {
+        searchField: searchField,
+        sortField: sortField
+    }
+})
+
 export {
     getPrescriptions,
     deletePrescriptionById,
@@ -89,5 +99,6 @@ export {
     logInUser,
     getUserDataByToken,
     getDoctors,
-    updateAssignedDoctors
+    updateAssignedDoctors,
+    getDoctorPatients
 }

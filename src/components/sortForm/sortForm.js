@@ -5,12 +5,12 @@ const SortForm = ({sortFields, onSubmit, onChange}) => {
     const fields = sortFields.map(
         fieldName => {
             return(
-                <div className={'sort-form__item'} key={fieldName}>
+                <div className={'sort-form__item'} key={fieldName.split(' ').join()}>
                     <p className={'sort-form__name'}>{fieldName}</p>
                     <input name={'sort-param'}
                            type={'radio'}
                            className={'doctor__contract'}
-                           value={fieldName}
+                           value={fieldName.split(' ').join('')}
                            onChange={event => onChange(event)}/>
                 </div>
             )

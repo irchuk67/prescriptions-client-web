@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {deletePrescriptionById, getPrescriptions, getUserDataByToken} from "../../api";
-import PrescriptionItem from "../receipt-item/receiptItem";
-import './receiptsList.scss';
+import PrescriptionItem from "../prescriptionItem/prescriptionItem";
+import './prescriptionsList.scss';
 import {Dialog, Alert, AlertTitle} from "@mui/material";
 import {connect} from "react-redux";
 import {deletePrescriptionByID, getAllPrescriptions, openUpdateForm} from "../../redux/actions";
@@ -15,17 +15,17 @@ const PrescriptionsList = (props) => {
 
     const onPrescriptionDelete = (id) => props.deletePrescriptionByID(id);
 
-    const receiptList = props.receipts.map(receipt => {
-        return (<PrescriptionItem key={receipt.id}
-                     text={receipt.text}
+    const receiptList = props.receipts.map(prescription => {
+        return (<PrescriptionItem key={prescription.id}
+                     prescriptionData={prescription}
                      onItemDelete={onPrescriptionDelete}
-                     id={receipt.id}
+                     id={prescription.id}
         />)
     });
 
     return (
-        <div className={'receipts-list'}>
-            <h1 className={'receipts-list__heading'}>Prescriptions list</h1>
+        <div className={'prescriptionsList'}>
+            <h1 className={'receipts-list__heading'}>History of prescriptions</h1>
             {receiptList}
             <Dialog
                 open={isDialogOpen}

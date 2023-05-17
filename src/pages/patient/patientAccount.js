@@ -8,7 +8,6 @@ import weight from "../../assets/weight-scale 1.svg";
 import callendar from "../../assets/callendar.svg";
 import gender from "../../assets/gender 1.svg";
 import {connect} from "react-redux";
-import {Route} from "react-router-dom";
 
 const renderFields = (userData) => {
     return (

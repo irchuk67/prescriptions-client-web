@@ -67,7 +67,7 @@ const AuthForm = props => {
                 if(role === 'patient')
                     navigate('/patient/main')
                 else if(role === 'doctor')
-                    navigate('/doctor')
+                    navigate('/doctor/main')
             }
         }catch (err){
             setIsError(true);
@@ -77,7 +77,6 @@ const AuthForm = props => {
 
     return (
         <div className={'auth'}>
-
             <form onSubmit={props.handleSubmit(onSubmit)}>
                 <Fields names={formFieldNames} component={renderFields}/>
                 <div className={'auth__buttons'}>
@@ -92,6 +91,7 @@ const AuthForm = props => {
                               onFormClose={onErrorClose}
                               title={errorMessage}
                               onClose={onErrorClose}
+                              buttonText={'Close'}
                 />}
         </div>
     )

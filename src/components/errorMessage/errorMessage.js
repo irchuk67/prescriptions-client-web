@@ -3,7 +3,7 @@ import React from "react";
 import './errorMessage.scss'
 import Button from "../button/button";
 
-const ErrorMessage = ({isOpen, onFormClose, title, onButtonClick, onClose}) => {
+const ErrorMessage = ({isOpen, onFormClose, title, onButtonClick, onClose, buttonText}) => {
     return(
         <Dialog open={isOpen || false} onClose={onFormClose} className={'error-dialog'}>
             <div className={'error-dialog__wrapper'}>
@@ -11,7 +11,7 @@ const ErrorMessage = ({isOpen, onFormClose, title, onButtonClick, onClose}) => {
                     <span>&times;</span>
                 </button>
                 <h3 className={'error-dialog__heading'}>{title}</h3>
-                <Button onButtonClick={onButtonClick} className={'button button__white button__white--green'}>Log in</Button>
+                <Button onButtonClick={onButtonClick} className={'button button__white button__white--green'}>{buttonText}</Button>
             </div>
         </Dialog>
     )

@@ -1,5 +1,5 @@
 import Button from "../../components/button/button";
-import ReceiptsList from "../../components/receipts-list/receiptsList";
+import ReceiptsList from "../../components/prescriptionsList/prescriptionsList";
 import AddReceipt from "../../components/addReceipt/addReceipt";
 import UpdateReceipt from "../../components/updateReceipt/updateReceipt";
 import React, {Component, useEffect, useState} from "react";

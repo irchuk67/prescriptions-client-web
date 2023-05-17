@@ -1,20 +1,8 @@
 .account {
   display: flex;
   flex-direction: column;
-
-  &__back-button {
-    &,
-    &:link,
-    &:visited {
-      font-size: 1.5rem;
-      text-decoration: none;
-      color: black;
-    }
-
-    & > span {
-      margin-right: .5rem;
-    }
-  }
+  margin: 1rem;
+  height: 95vh;
 
   &__data {
     align-self: center;
@@ -22,7 +10,8 @@
     flex-direction: column;
     /*    align-items: center;*/
     width: 40%;
-
+    height: 100%;
+    justify-content: space-between;
   }
 
   &__personal-info {
@@ -78,12 +67,9 @@
 }
 
 .log-out {
-  align-self: center;
   display: flex;
   align-items: center;
-  position: absolute;
-  bottom: 5rem;
-
+  align-self: center;
   font-size: 3rem;
   font-weight: bold;
 

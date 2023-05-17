@@ -1,23 +1,42 @@
-.dialog{
-  width: 100%;
+#dialog{
+
 }
 .new-form{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
   &__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     padding: 3.5rem;
-    width: 45rem;
-    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: white;
   }
+
   &__heading{
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
   }
 
   &__field{
     display: flex;
     flex-direction: column;
+    margin-bottom: 1rem;
   }
 
   &__input{
+    width: 100%;
     border: none;
     border-radius: .5rem;
     height: 3rem;
@@ -31,7 +50,7 @@
 
   &__label{
     margin-bottom: 1rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   &__buttons{
@@ -41,11 +60,10 @@
   }
 
   &__button{
+    padding: 1rem 1.5rem;
     &:not(:last-child){
-      margin-right: 1rem;
+      margin-right: 2rem;
     }
   }
 
-  display: flex;
-  flex-direction: column;
 }

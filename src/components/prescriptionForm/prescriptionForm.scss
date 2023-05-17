@@ -1,0 +1,108 @@
+.prescription-form{
+  &__input{
+    &:focus-visible{
+      box-shadow: 0 .4rem 2rem rgba(#8dfdb8, .6);;
+    }
+  }
+
+  &__need-to-repeat{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    & > label{
+      margin-bottom: 0;
+    }
+    & > div > input{
+      appearance: none;
+      height: 2.5rem;
+      width: 2.5rem;
+      font: inherit;
+      color: currentColor;
+      background-color: white;
+      border-radius: 0.15rem;
+      transform: translateY(-0.075em);
+      transition: .2s all;
+      &:checked::before{
+        display: block;
+      }
+      &::before{
+        content: "";
+        transform-origin: bottom left;
+        clip-path: polygon(40% 84%, 94% 6%, 100% 14%, 42% 100%, 0 62%, 0% 50%);
+        background-color: black;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+
+  &__text-select--group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & > input{
+      margin-right: 1rem;
+    }
+
+
+  }
+}
+
+.select {
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+  position: relative;
+
+  & > select{
+    width: 100%;
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    & > option{
+
+      &:hover{
+        background-color: #8dfdb8;
+      }
+      &:first-child{
+      }
+    }
+
+  }
+}
+
+.medicines{
+  &__header{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__button{
+    background-color: #d0d0ff;
+    border: none;
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+    transition: .2s all;
+    &:hover{
+      background-color: #a2a2ff;
+    }
+  }
+  &__medicine{
+    margin-top: 1.5rem;
+    &--header{
+      display: flex;
+      justify-content: space-between;
+      background: #d0d0ff;
+      padding: 1rem;
+      border-radius: .5rem;
+    }
+    &--heading{
+      color: white;
+      font-size: 1.6rem;
+    }
+    &--remove{
+      border: none;
+      background: none;
+    }
+  }
+}

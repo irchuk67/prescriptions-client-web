@@ -98,6 +98,7 @@ let registerForm = (props) => {
                               title={errorMessage}
                               onClose={onErrorClose}
                               onButtonClick={onErrorButtonClick}
+                              buttonText={'Log in'}
                 />}
         </div>
     )

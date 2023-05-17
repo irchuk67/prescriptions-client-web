@@ -1,15 +1,15 @@
 const validate = (formValues) => {
     const errors = {};
     if (!formValues.name) {
-        errors.name = 'Enter your name'
+        errors.name = 'Required'
     }
 
     if (!formValues.surname) {
-        errors.surname = 'Enter your surname'
+        errors.surname = 'Required'
     }
 
     if (!formValues.birthDate) {
-        errors.birthDate = 'Enter your date of birth'
+        errors.birthDate = 'Required'
     }
 
     if (!formValues.sex) {
