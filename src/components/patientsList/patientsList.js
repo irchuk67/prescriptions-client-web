@@ -6,6 +6,7 @@ import search from "../../assets/icons8-search 1.svg";
 import sort from "../../assets/filter 1.svg";
 import SortForm from "../sortForm/sortForm";
 import {useNavigate} from "react-router-dom";
+import {formatDate} from "../../format";
 
 const patientItems = (patients) => {
     const navigate = useNavigate();
@@ -15,13 +16,14 @@ const patientItems = (patients) => {
         navigate(`/doctor/main/${patientId}`)
     }
     return patients.map(patient => {
+        const lastPrescriptionDate = patient.lastPrescriptionDate !== "" ? formatDate(patient.lastPrescriptionDate) : "";
         return (
             <div className={'patient__item'} key={patient.userId} onClick={() => OnPatientClick(patient.userId)}>
                 <div className={'patient__info'}>
                     <p className={'patient__name'}>{patient.surname} {patient.name} {patient.middleName}</p>
                     <div className={'patient__lastPrescriptionGroup'}>
-                        <p className={'patient__lastPrescription'}>ghghghgjh{/*{patient.lastPrescription}*/}</p>
-                        <p className={'patient__lastPrescriptionDate'}>10.09.89{/*{patient.lastPrescriptionDate}*/}</p>
+                        <p className={'patient__lastPrescription'}>{patient.lastPrescription}</p>
+                        <p className={'patient__lastPrescriptionDate'}>{lastPrescriptionDate}</p>
                     </div>
                 </div>
             </div>

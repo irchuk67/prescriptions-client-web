@@ -5,9 +5,15 @@ import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import {cleanCurrentUserData, logOut} from "../../redux/actions";
 import BackButton from "../backButton/backButton";
+import React from "react";
 
 const Account = (props) => {
-
+    const currentUserId = JSON.parse(localStorage.getItem('currentUser')).userId
+    const onLogOut = ( ) => {
+        localStorage.setItem('token', '');
+        props.logOut();
+        props.cleanCurrentUserData();
+    }
     return (
         <div className={'account'}>
             <BackButton backPath={props.backPath}/>
@@ -24,6 +30,7 @@ const Account = (props) => {
                         {props.children}
                     </div>
                 </div>
+                {currentUserId === props.userData.userId && <NavLink className={'log-out'} to={'/'} onClick={onLogOut}><img src={logOutIMG} alt={'log out'}/>Log out</NavLink>}
             </div>
         </div>
     )

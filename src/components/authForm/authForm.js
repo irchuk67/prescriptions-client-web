@@ -4,7 +4,7 @@ import ErrorMessage from "../errorMessage/errorMessage";
 import React, {Component} from "react";
 import {useState} from "react";
 import userIcon from '../../assets/account.svg';
-import lock from '../../assets/lock-svgrepo-com 1.png';
+import lock from '../../assets/lock-svgrepo-com 1.svg';
 import './authForm.scss';
 import {connect} from "react-redux";
 import {closeAuthForm, getCurrentUserData, logIn, openRegisterForm} from "../../redux/actions";

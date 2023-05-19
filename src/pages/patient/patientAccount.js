@@ -75,21 +75,10 @@ const renderFields = (userData) => {
 }
 
 const PatientAccount = (props) => {
-    const onLogOut = ( ) => {
-        localStorage.setItem('token', '');
-        props.logOut();
-        props.cleanCurrentUserData();
-    }
-
-    return (
-        <div className={'personal-account'}>
-            <Account userData={props.userData} backPath={'/patient/main'}>
-                {renderFields(props.userData)}
-            </Account>
-            <NavLink className={'log-out'} to={'/'} onClick={onLogOut}><img src={logOutIMG} alt={'log out'}/>Log out</NavLink>
-        </div>
-
-
+      return (
+        <Account userData={props.userData} backPath={'/patient/main'}>
+            {renderFields(props.userData)}
+        </Account>
     )
 }
 
