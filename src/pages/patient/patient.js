@@ -6,6 +6,9 @@ import {NavLink, Route, Routes} from "react-router-dom";
 import './patient.scss';
 import DoctorsList from "../../components/doctorsList/doctorsList";
 import PatientAccount from "./patientAccount";
+import HistoryOfPrescriptions from "../../components/HistoryOfPrescriptions/HistoryOfPrescriptions";
+import ListOfMedicines from "../../components/ListOfMedicines/ListOfMedicines";
+import DailyPrescriptions from "../../components/dailyPrescriptions/dailyPrescriptions";
 
 const Patient = () => {
     return (
@@ -21,7 +24,10 @@ const Patient = () => {
                         </NavLink>
                     </div>
                     <Routes>
+                        <Route path={'/'} element={<DailyPrescriptions/>}/>
                         <Route path={'/doctors'} element={<DoctorsList/>}/>
+                        <Route path={'/history'} element={<HistoryOfPrescriptions/>}/>
+                        <Route path={'/medicines'} element={<ListOfMedicines/>}/>
                     </Routes>
                 </div>
             }/>

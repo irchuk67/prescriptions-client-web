@@ -1,0 +1,15 @@
+.medicines-list{
+  margin: 1.5rem;
+  &__header{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button{
+    width: 10rem;
+  }
+
+  &__title{
+    font-size: 2rem;
+  }
+}

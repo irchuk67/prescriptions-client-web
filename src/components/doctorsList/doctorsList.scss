@@ -83,29 +83,3 @@
   }
 }
 
-.search {
-  & > form {
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
-
-  & > form > input {
-    border: 1px solid #aeaeaf;
-    border-radius: 1rem;
-    padding: 1rem 1.5rem;
-    width: 100%;
-    position: relative;
-    box-shadow: 0 .4rem 2rem rgba(black, .2);
-
-    &:focus-visible {
-      outline: none;
-      box-shadow: 0 .4rem 2rem rgba(#a2a2ff, .6);;
-    }
-  }
-
-  & > form > img {
-    position: absolute;
-    right: 4rem;
-  }
-}

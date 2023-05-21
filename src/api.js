@@ -94,6 +94,22 @@ const getDoctorPatientById = async (patientId, token) => await Server.get(`/user
         Authorization: token
     }
 })
+
+const getDailyPrescriptions = async (token) => await Server.get('/prescriptions/daily', {
+    headers:{
+        Authorization: token
+    }
+})
+
+const changePrescriptionStatus = async (token, prescriptionId) => {
+    return await Server.patch(`/prescriptions/${prescriptionId}`,{},
+        {
+            headers:{
+                Authorization: token
+            }
+        })
+}
+
 export {
     getPrescriptions,
     deletePrescriptionById,
@@ -106,5 +122,7 @@ export {
     getDoctors,
     updateAssignedDoctors,
     getDoctorPatients,
-    getDoctorPatientById
+    getDoctorPatientById,
+    getDailyPrescriptions,
+    changePrescriptionStatus
 }

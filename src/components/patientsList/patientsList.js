@@ -7,14 +7,9 @@ import sort from "../../assets/filter 1.svg";
 import SortForm from "../sortForm/sortForm";
 import {useNavigate} from "react-router-dom";
 import {formatDate} from "../../format";
+import Search from "../search/search";
 
-const patientItems = (patients) => {
-    const navigate = useNavigate();
-    const OnPatientClick = (patientId) => {
-        const currentPatient = patients.filter(patient => patient.userId === patientId)[0];
-        localStorage.setItem('currentPatient', JSON.stringify(currentPatient));
-        navigate(`/doctor/main/${patientId}`)
-    }
+const patientItems = (patients, OnPatientClick) => {
     return patients.map(patient => {
         const lastPrescriptionDate = patient.lastPrescriptionDate !== "" ? formatDate(patient.lastPrescriptionDate) : "";
         return (
@@ -45,15 +40,15 @@ const PatientsList = (props) => {
         getPatients().catch(err => console.log(err))
     }, []);
 
+    const onSearchChange = (event) => {
+        event.preventDefault();
+        setPatientSearch(event.target.value);
+    }
+
     const onSearchSubmit = async (event) => {
         event.preventDefault();
         await props.getPatientsListForDoctor(localStorage.getItem('token'), patientSearch);
         setPatientSearch('')
-    }
-
-    const onSearchChange = (event) => {
-        event.preventDefault();
-        setPatientSearch(event.target.value);
     }
 
     const onSortFieldChange = (event) => {
@@ -65,25 +60,32 @@ const PatientsList = (props) => {
         await props.getPatientsListForDoctor(localStorage.getItem('token'), patientSearch, sortField);
         setIsSortOpen(false)
     }
+
+
+    const navigate = useNavigate();
+    const OnPatientClick = (patientId) => {
+        const currentPatient = props.patients.filter(patient => patient.userId === patientId)[0];
+        localStorage.setItem('currentPatient', JSON.stringify(currentPatient));
+        navigate(`/doctor/main/${patientId}`)
+    }
+
     return (
         <React.Fragment>
             {isSortOpen ?
-                <SortForm sortFields={sortFields} onSubmit={onSortFieldSelect} onChange={onSortFieldChange}/>
+                <SortForm sortFields={sortFields}
+                          onSubmit={onSortFieldSelect}
+                          onChange={onSortFieldChange}/>
                 :
                 <div className={'patient-list'}>
                     <p className={'patient-list__heading'}>Your patients</p>
-                    <div className={'search'}>
-                        <form onSubmit={(event) => onSearchSubmit(event)}>
-                            <input type={'text'} placeholder={'Doctor data'} value={patientSearch}
-                                   onChange={event => onSearchChange(event)}/>
-                            <img src={search}/>
-                        </form>
-                    </div>
-                    <div className={'sort'} onClick={() => setIsSortOpen(true)}>
+                    <Search onSearchSubmit={onSearchSubmit} onSearchChange={onSearchChange} searchField={patientSearch}/>
+                    <div className={'sort'} onClick={() => {
+                        setIsSortOpen(true)
+                    }}>
                         <p className="sort__heading">Sort patients</p>
-                        <img src={sort}/>
+                        <img src={sort} alt={'sort icon'}/>
                     </div>
-                    {patientItems(props.patients)}
+                    {patientItems(props.patients, OnPatientClick)}
                 </div>
             }
         </React.Fragment>

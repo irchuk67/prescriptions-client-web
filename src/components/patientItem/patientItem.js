@@ -7,7 +7,6 @@ import PrescriptionsList from "../prescriptionsList/prescriptionsList";
 import {getAllPrescriptions, getPatientForDoctorById, openAddForm} from "../../redux/actions";
 import AddReceipt from "../addReceipt/addReceipt";
 import './patientItem.scss';
-import UpdatePrescription from "../updateReceipt/updateReceipt";
 import PatientAccountForDoctor from "../patientAccountForDoctor/patientAccountForDoctor";
 
 const PatientItem = (props) => {
