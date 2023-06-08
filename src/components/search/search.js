@@ -8,7 +8,7 @@ const Search = ({onSearchChange, searchField, onSearchSubmit}) => {
             <form  onSubmit={(event) => onSearchSubmit(event)}>
                 <input type={'text'} placeholder={'Doctor data'} value={searchField}
                        onChange={event => onSearchChange(event)}/>
-                <img src={search} alt={'search icon'}/>
+                <img src={search} alt={'search icon'} onClick={(event) => onSearchSubmit(event)}/>
             </form>
         </div>
     )

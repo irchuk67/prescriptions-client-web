@@ -1,12 +1,13 @@
-#dialog{
+@import "src/base";
 
-}
 .new-form{
   width: 50%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-
+  @media only screen and (max-width: $medium-large){
+    width: 85%;
+  }
   &__wrapper{
     display: flex;
     flex-direction: column;

@@ -1,5 +1,4 @@
 import {ADD_PRESCRIPTION, DELETE_PRESCRIPTION, GET_ALL_PRESCRIPTIONS, UPDATE_PRESCRIPTION} from "../types";
-import _ from 'lodash';
 
 const INITIAL_STATE = []
 export default (state = INITIAL_STATE, action) => {

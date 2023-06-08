@@ -1,3 +1,5 @@
+@import "src/base";
+
 .prescription-form{
   &__input{
     &:focus-visible{
@@ -19,7 +21,7 @@
       width: 2.5rem;
       font: inherit;
       color: currentColor;
-      background-color: white;
+      background-color: $white;
       border-radius: 0.15rem;
       transform: translateY(-0.075em);
       transition: .2s all;
@@ -30,7 +32,7 @@
         content: "";
         transform-origin: bottom left;
         clip-path: polygon(40% 84%, 94% 6%, 100% 14%, 42% 100%, 0 62%, 0% 50%);
-        background-color: black;
+        background-color: $black;
         width: 1.5rem;
         height: 1.5rem;
       }
@@ -56,16 +58,17 @@
   position: relative;
 
   & > select{
-    width: 100%;
     padding: .5rem 1rem;
     border: none;
     border-radius: 4px;
-    & > option{
+    &:focus-visible{
+      border: none;
+      outline: none;
+    }
 
+    & > option{
       &:hover{
-        background-color: #8dfdb8;
-      }
-      &:first-child{
+        background-color: $green-medium;
       }
     }
 
@@ -78,13 +81,14 @@
     justify-content: space-between;
   }
   &__button{
-    background-color: #d0d0ff;
+    background-color: $lavender-medium;
     border: none;
     border-radius: .5rem;
     padding: .5rem 1rem;
     transition: .2s all;
+    font-size: 1.3rem;
     &:hover{
-      background-color: #a2a2ff;
+      background-color: $lavender-dark;
     }
   }
   &__medicine{

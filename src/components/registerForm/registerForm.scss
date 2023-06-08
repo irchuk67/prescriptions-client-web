@@ -1,3 +1,5 @@
+@import "src/base";
+
 .register {
   width: 100%;
   height: 100vh;
@@ -5,11 +7,18 @@
   display: flex;
   justify-content: center;
   overflow-y: scroll;
+  -ms-overflow-y:scroll;
   scrollbar-width: thin;
-  scrollbar-color: #abfccd #d0d0ff;
+  scrollbar-color: $green-light $lavender-medium;
+  @media only screen and (max-width: $medium-large){
+
+  }
 
   & > form{
     width: 75%;
+    @media only screen and (max-width: $small){
+      width: 85%;
+    }
   }
   &__field{
     margin: 1rem 0;
@@ -20,7 +29,7 @@
 
   &__error {
     font-size: 1.2rem;
-    color: #ff2424;
+    color: $error;
   }
 
   &__radio-group{
@@ -83,6 +92,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media only screen and (max-width: $largest){
+      flex-direction: row;
+    }
   }
 
   &__button {
@@ -90,5 +103,9 @@
     width: 50%;
     padding: 1.5rem 2rem;
     margin: 1.5rem 2rem;
+    @media only screen and (max-width: $largest){
+      padding: 1rem 1.5rem;
+
+    }
   }
 }

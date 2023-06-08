@@ -1,3 +1,5 @@
+@import "src/base";
+
 .patient-list{
   display: flex;
   flex-direction: column;
@@ -33,7 +35,18 @@
     justify-content: space-between;
 
     font-size: 1.3rem;
+    @media only screen and (max-width: $small){
+      flex-direction: column;
+    }
+
   }
+  &__lastPrescription{
+    overflow: hidden;
+    margin-right: 1rem;
+    font-style: italic;
+
+  }
+
 
 
 }

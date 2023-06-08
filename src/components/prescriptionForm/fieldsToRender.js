@@ -70,7 +70,7 @@ const renderRepeatPeriod = () => {
     return (
         <div>
             <Field name={'periodOfRepeat'}
-                   type={'text'}
+                   type={'number'}
                    component={renderFieldTextSelect}
                    label={'Period of repeat'}
                    options={['hour', 'day', 'week', 'month', 'year']}

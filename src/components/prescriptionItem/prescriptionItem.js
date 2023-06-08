@@ -12,13 +12,13 @@ const PrescriptionItem = ({prescriptionData, deletePrescriptionByID, id, openUpd
         openUpdateForm(id, prescriptionData)
     }
     return(
-        <div className={'receipt-item'}>
-            {prescriptionData.title}
+        <div className={'prescription-item'}>
+            <p className={'prescription-item__title'}>{prescriptionData.title}</p>
             {isUpdateOpen && <UpdatePrescription/>}
 
-            <div className={'receipt-item__icons'}>
-                <Edit onClick={() => onUpdateClick(id, prescriptionData)}/>
-                <Delete color={"error"} onClick={() => deletePrescriptionByID(id, localStorage.getItem('token'), assigneeId)}/>
+            <div className={'prescription-item__icons'}>
+                <Edit onClick={() => onUpdateClick(id, prescriptionData)} sx={{fontSize: 20, marginRight: 1}}/>
+                <Delete color={"error"} onClick={() => deletePrescriptionByID(id, localStorage.getItem('token'), assigneeId)} sx={{fontSize: 20}}/>
             </div>
         </div>
     )

@@ -12,7 +12,7 @@ import Doctor from "./pages/doctor/doctor";
 
 const App = (props) => {
     const token = localStorage.getItem('token');
-    const role = JSON.parse(localStorage.getItem('currentUser')).role;
+    const role = JSON.parse(localStorage.getItem('currentUser'))?.role;
     return (
         <BrowserRouter>
             <Routes>

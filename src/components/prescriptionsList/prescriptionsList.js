@@ -25,7 +25,7 @@ const PrescriptionsList = (props) => {
 
     return (
         <div className={'prescriptionsList'}>
-            <h1 className={'receipts-list__heading'}>History of prescriptions</h1>
+            <h1 className={'prescriptionsList__heading'}>History of prescriptions</h1>
             {receiptList}
             <Dialog
                 open={isDialogOpen}

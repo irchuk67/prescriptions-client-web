@@ -27,7 +27,6 @@ const Patient = () => {
                         <Route path={'/'} element={<DailyPrescriptions/>}/>
                         <Route path={'/doctors'} element={<DoctorsList/>}/>
                         <Route path={'/history'} element={<HistoryOfPrescriptions/>}/>
-                        <Route path={'/medicines'} element={<ListOfMedicines/>}/>
                     </Routes>
                 </div>
             }/>

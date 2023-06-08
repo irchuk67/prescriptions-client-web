@@ -12,9 +12,6 @@ const PrescriptionForm = (props) => {
         ['periodOfRepeat'],
         ['medicines']]
 
-/*
-    console.log(props.initialValues)
-*/
     return (
         <DialogForm title={props.title}
                     buttonText={props.buttonText}
@@ -35,9 +32,6 @@ const selector = formValueSelector('receiptForm');
 
 export default connect((state, ownProps) => {
     const needToRepeat = selector(state, 'needToRepeat');
-/*
-    console.log(ownProps)
-*/
     const initialData = () => {
         if (ownProps.initialValues) {
             return {

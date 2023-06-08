@@ -1,6 +1,6 @@
 import BackButton from "../backButton/backButton";
 import {connect} from "react-redux";
-import {NavLink, Routes, Route} from "react-router-dom";
+import {NavLink, Routes, Route, useNavigate} from "react-router-dom";
 import Button from '../button/button';
 import {useState} from "react";
 import PrescriptionsList from "../prescriptionsList/prescriptionsList";
@@ -14,14 +14,17 @@ const PatientItem = (props) => {
     const patientId = path[3];
     const currentPatient = JSON.parse(localStorage.getItem('currentPatient'));
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+    const navigate = useNavigate();
 
     const onShowHistoryClick = async () => {
         await props.getAllPrescriptions(localStorage.getItem('token'), patientId);
         setIsHistoryOpen(!isHistoryOpen)
     }
 
+
     const onGetUserData = async () => {
-        await props.getPatientForDoctorById(patientId, localStorage.getItem('token'))
+        await props.getPatientForDoctorById(patientId, localStorage.getItem('token'));
+        navigate(`/doctor/main/${patientId}/data`)
     }
 
     return(
@@ -29,25 +32,25 @@ const PatientItem = (props) => {
             <BackButton backPath={'/doctor/main'}/>
             <div className={'patient-item__header'}>
                 <p className={'patient-item__heading'}>{currentPatient.name} {currentPatient.surname} {currentPatient.middleName}</p>
-                <NavLink to={`/doctor/main/${patientId}/data`}>
+                <div className={'patient-item__buttons'}>
                     <Button className={'button button__green'} onButtonClick={() => onGetUserData()}>Patient`s data</Button>
-                </NavLink>
-                <Button className={'button button__green'} onButtonClick={() => onShowHistoryClick()}>
-                    {isHistoryOpen ?
-                        <div>
-                            <p>
-                                hide receipts
-                            </p>
-                        </div>
-                        :
-                        <div>
-                            <p>
-                                Show all receipts
-                            </p>
-                        </div>
-                    }
-                </Button>
-                <Button className={'button button__pink'} onButtonClick={() => props.openAddForm()}>Add prescription</Button>
+                    <Button className={'button button__green'} onButtonClick={() => onShowHistoryClick()}>
+                        {isHistoryOpen ?
+                            <div>
+                                <p>
+                                    hide prescriptions
+                                </p>
+                            </div>
+                            :
+                            <div>
+                                <p>
+                                    Show all prescriptions
+                                </p>
+                            </div>
+                        }
+                    </Button>
+                    <Button className={'button button__pink'} onButtonClick={() => props.openAddForm()}>Add prescription</Button>
+                </div>
             </div>
             {isHistoryOpen && <PrescriptionsList/>}
             {props.isAddFormOpen && <AddReceipt/>}

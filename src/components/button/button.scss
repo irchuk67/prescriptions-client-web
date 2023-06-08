@@ -1,3 +1,5 @@
+@import "src/base";
+
 .button{
   border: none;
   padding: 1rem;
@@ -5,6 +7,7 @@
   text-transform: capitalize;
   margin-bottom: 1rem;
   transition: all .3s;
+  font-size: 1.3rem;
 
   &:focus-visible{
     outline: none;
@@ -22,47 +25,47 @@
   }
 
   &__green{
-    background-color: #ABFCCDFF;
+    background-color: $green-light;
     &:hover, &:focus{
-      background-color: #8dfdb8;
+      background-color: $green-medium;
     }
   }
 
   &__pink{
-    background-color: #E6E6FAFF;
+    background-color: $pink-light;
     &:hover, &:focus{
-      background-color: #f178c8;
+      background-color: $pink-medium;
     }
   }
 
   &__lavender{
-    background-color: lavender;
+    background-color: $lavender-light;
     &:hover, &:focus{
-      background-color: #e1e1fa;
+      background-color: $lavender-medium;
     }
   }
 
   &__white{
-    background: white;
+    background: $white;
     &--lavender{
-      color: #acacfc;
+      color: $lavender-dark;
       &:hover, &:focus{
-        background: #acacfc;
-        color: #ffffff;
+        background: $lavender-dark;
+        color: $white;
       }
     }
     &--green{
-      color: #5ae3a6;
+      color: $green-dark;
       &:hover, &:focus{
-        background: #5ae3a6;
-        color: #ffffff;
+        background: $green-dark;
+        color: $white;
       }
     }
     &--gray{
-      color: #7c7c83;
+      color: $gray;
       &:hover, &:focus{
-        background: #7c7c83;
-        color: #ffffff;
+        background: $gray;
+        color: $white;
       }
     }
   }

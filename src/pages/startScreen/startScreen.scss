@@ -1,21 +1,37 @@
+@import "src/base";
+
 .start {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1.5fr 1fr;
   overflow: hidden;
+  @media only screen and (max-width: $medium-large){
+    grid-template-columns:  1fr;
+    grid-template-rows: 1fr;
+  }
   &__col-1 {
     background-image: url("../../assets/start-screen.jpg");
     background-size: cover;
+    grid-column: 1/2;
+    @media only screen and (max-width: $medium-large){
+      visibility: hidden;
+      overflow: hidden;
+
+    }
   }
 
   &__col-2{
-    background-image: linear-gradient(to right bottom, #ABFCCD, #D0D0FF);
+    grid-column: 2/-1;
+    background-image: $lavender-green-gradient;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    @media only screen and (max-width: $medium-large){
+      grid-column: 1/-1;
+      grid-row: 1/-1;
+    }
     & > img{
       width: 10rem;
       margin-bottom: 2.5rem;

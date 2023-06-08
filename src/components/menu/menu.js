@@ -1,10 +1,11 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {closeMenu, openMenu} from "../../redux/actions";
 import './menu.scss';
 
 const Menu = ({isMenuOpen, openMenu, closeMenu}) => {
+    const navigate = useNavigate();
 
     const onMenuClick = () => {
         {isMenuOpen
@@ -17,6 +18,15 @@ const Menu = ({isMenuOpen, openMenu, closeMenu}) => {
 
     const className = isMenuOpen ? 'burger-menu' : 'hiden';
 
+    const onHistoryOfPrescriptionsOpen = () => {
+        navigate('/patient/main/history');
+        closeMenu();
+    }
+
+    const onDoctorsOpen = () => {
+        navigate('/patient/main/doctors');
+        closeMenu();
+    }
     return (
         <div className={className}>
             <div className={`burger-menu__button burger-menu__button${isMenuOpen ? '--checked' : ''}`}
@@ -30,14 +40,11 @@ const Menu = ({isMenuOpen, openMenu, closeMenu}) => {
                 <nav className="burger-menu__nav">
                     <h3>Menu</h3>
                     <ul className="burger-menu__list">
-                        <li className="burger-menu__item">
-                            <NavLink to={'/patient/main/history'} className="burger-menu__link" onClick={closeMenu}>History of prescriptions</NavLink>
+                        <li className="burger-menu__item" onClick={onHistoryOfPrescriptionsOpen}>
+                            History of prescriptions
                         </li>
-                        <li className="burger-menu__item">
-                            <NavLink to={'/patient/main/doctors'} className="burger-menu__link" onClick={closeMenu}>Add new doctor</NavLink>
-                        </li>
-                        <li className="burger-menu__item">
-                            <NavLink to={'/patient/main/medicines'} className="burger-menu__link" onClick={closeMenu}>List of medicines</NavLink>
+                        <li className="burger-menu__item" onClick={onDoctorsOpen}>
+                            Add new doctor
                         </li>
                     </ul>
                 </nav>}

@@ -1,10 +1,11 @@
-.daily-prescriptions{
+.daily-prescriptions {
   margin: 1.5rem;
-  &__title{
+
+  &__title {
     font-size: 2rem;
   }
 
-  &__prescription{
+  &__prescription {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -15,18 +16,25 @@
 
     background-color: #d0d0ff;
 
-    &__title{
+    &__info {
+      width: 90%;
+      overflow: hidden;
+      margin-right: 1rem;
+    }
+
+    &__title {
       font-size: 1.8rem;
       text-transform: capitalize;
     }
 
-    &__description{
+    &__description {
       font-size: 1.4rem;
       text-transform: capitalize;
     }
 
-    &__done{
+    &__done {
       appearance: none;
+      display: block;
       height: 2rem;
       width: 2rem;
       font: inherit;
@@ -35,10 +43,12 @@
       border-radius: 0.15rem;
       transform: translateY(-0.075em);
       transition: .2s all;
-      &:checked::before{
+
+      &:checked::before {
         display: block;
       }
-      &::before{
+
+      &::before {
         content: "";
         transform-origin: bottom left;
         clip-path: polygon(40% 84%, 94% 6%, 100% 14%, 42% 100%, 0 62%, 0% 50%);

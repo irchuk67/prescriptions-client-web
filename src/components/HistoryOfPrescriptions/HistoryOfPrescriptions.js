@@ -1,7 +1,6 @@
 import {NavLink} from "react-router-dom";
 import Button from "../button/button";
 import React, {useEffect} from "react";
-import PrescriptionsList from "../prescriptionsList/prescriptionsList";
 import {connect} from "react-redux";
 import {getAllPrescriptions} from "../../redux/actions";
 import './HistoryOfPrescriptions.scss';
