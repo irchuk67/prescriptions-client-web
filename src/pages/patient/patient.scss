@@ -1,0 +1,14 @@
+.patient{
+  overflow: hidden;
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    &--link{
+      & > img{
+        height: 5rem;
+        width: 5rem;
+      }
+    }
+  }
+}

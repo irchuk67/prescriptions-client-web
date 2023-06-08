@@ -1,0 +1,85 @@
+.doctor{
+  &__item{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin: 1.5rem 0;
+    border-radius: .5rem;
+    padding: 1.5rem 2rem 2rem 1.5rem;
+
+    background-color: #d0d0ff;
+  }
+
+  &__data{
+    display: flex;
+    align-items: flex-start;
+
+    & > img{
+      height: 4rem;
+      width: 4rem;
+      margin-right: 1rem;
+    }
+  }
+
+  &__name{
+    font-size: 1.8rem;
+    text-transform: capitalize;
+  }
+
+  &__specialisation{
+    font-size: 1.4rem;
+    text-transform: capitalize;
+  }
+
+  &__contract{
+    appearance: none;
+    height: 2rem;
+    width: 2rem;
+    font: inherit;
+    color: currentColor;
+    background-color: white;
+    border-radius: 0.15rem;
+    transform: translateY(-0.075em);
+    transition: .2s all;
+    &:checked::before{
+      display: block;
+    }
+    &::before{
+      content: "";
+      transform-origin: bottom left;
+      clip-path: polygon(40% 84%, 94% 6%, 100% 14%, 42% 100%, 0 62%, 0% 50%);
+      background-color: black;
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+  }
+}
+
+.doctors{
+  margin: 1.5rem;
+  &__header{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button{
+    width: 10rem;
+  }
+
+  &__title{
+    font-size: 2rem;
+  }
+}
+
+.sort{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+  color: #7c7c83;
+  &__heading{
+    margin-right: 1rem;
+  }
+}
+

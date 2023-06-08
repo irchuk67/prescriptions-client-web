@@ -1,0 +1,25 @@
+.prescription-item{
+  background-color: lavender;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__icons{
+    display: flex;
+    justify-content: space-between;
+    &:not(:last-child){
+      margin-right: .5rem;
+    }
+  }
+
+  &__title{
+    font-size: 1.5rem;
+    overflow: hidden;
+    margin-right: 1rem;
+  }
+}

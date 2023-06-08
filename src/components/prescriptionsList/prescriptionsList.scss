@@ -1,0 +1,21 @@
+#alert-window {
+  padding: 1.5rem;
+  font-size: 1.5rem;
+
+  display: flex;
+  & .css-yslrua-MuiTypography-root-MuiAlertTitle-root{
+    font-size: 2rem;
+  }
+
+  & .css-1vooibu-MuiSvgIcon-root{
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+.prescriptionsList{
+  &__heading{
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}

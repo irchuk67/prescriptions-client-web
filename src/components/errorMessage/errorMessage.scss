@@ -1,0 +1,35 @@
+.error-dialog{
+  width: 100%;
+  z-index: 3000;
+  position: absolute;
+  &__wrapper{
+    padding: 3.5rem;
+    width: 45rem;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  &__heading{
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: #7c7c83;
+  }
+
+  &__close{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    border: none;
+    color: #d0d0ff;
+    background-color: white;
+    transition: 0.2s all;
+    &:hover{
+      transform: scale(1.3);
+    }
+  }
+
+}

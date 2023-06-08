@@ -1,23 +1,76 @@
+@import "src/base";
+
 .button{
   border: none;
   padding: 1rem;
-  background-color: #ABFCCDFF;
   border-radius: .5rem;
   text-transform: capitalize;
   margin-bottom: 1rem;
   transition: all .3s;
-  & .rotating-star{
-    margin: 0 .5rem;
-    font-size: 1.5rem;
-    transition: all 2s;
+  font-size: 1.3rem;
+
+  &:focus-visible{
+    outline: none;
+  }
+  &:visited{
+    text-decoration: none;
+    color: inherit;
+  }
+  &:focus{
+    color: inherit;
   }
 
-  &:hover{
-    background-color: #a0ffc7;
-    & .rotating-star{
-      transform: rotate(90deg);
+  button:active {
+    transform: scale(0.99);
+  }
+
+  &__green{
+    background-color: $green-light;
+    &:hover, &:focus{
+      background-color: $green-medium;
+    }
+  }
+
+  &__pink{
+    background-color: $pink-light;
+    &:hover, &:focus{
+      background-color: $pink-medium;
+    }
+  }
+
+  &__lavender{
+    background-color: $lavender-light;
+    &:hover, &:focus{
+      background-color: $lavender-medium;
+    }
+  }
+
+  &__white{
+    background: $white;
+    &--lavender{
+      color: $lavender-dark;
+      &:hover, &:focus{
+        background: $lavender-dark;
+        color: $white;
+      }
+    }
+    &--green{
+      color: $green-dark;
+      &:hover, &:focus{
+        background: $green-dark;
+        color: $white;
+      }
+    }
+    &--gray{
+      color: $gray;
+      &:hover, &:focus{
+        background: $gray;
+        color: $white;
+      }
     }
   }
 }
+
+
 
 

@@ -1,0 +1,13 @@
+.doctor{
+  padding: 1rem;
+  position: relative;
+  &__header--link{
+    position: absolute;
+    right: 0;
+    top: 0;
+    & > img{
+      height: 5rem;
+      width: 5rem;
+    }
+  }
+}

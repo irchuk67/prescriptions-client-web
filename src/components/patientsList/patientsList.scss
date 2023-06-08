@@ -1,0 +1,52 @@
+@import "src/base";
+
+.patient-list{
+  display: flex;
+  flex-direction: column;
+  &__heading{
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.patient{
+  &__item{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin: 1.5rem 0;
+    border-radius: .5rem;
+    padding: 1.5rem 2rem 2rem 1.5rem;
+
+    background-color: #d0d0ff;
+  }
+
+  &__info{
+    width: 100%;
+  }
+  &__name{
+    font-size: 1.8rem;
+    text-transform: capitalize;
+  }
+
+  &__lastPrescriptionGroup{
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 1.3rem;
+    @media only screen and (max-width: $small){
+      flex-direction: column;
+    }
+
+  }
+  &__lastPrescription{
+    overflow: hidden;
+    margin-right: 1rem;
+    font-style: italic;
+
+  }
+
+
+
+}

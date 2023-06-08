@@ -1,0 +1,44 @@
+@import "src/base";
+
+.history{
+  margin: 1.5rem;
+  &__header{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button{
+    width: 10rem;
+  }
+
+  &__title{
+    font-size: 2rem;
+  }
+}
+
+.prescription{
+  display: flex;
+  background-color: lavender;
+  border-radius: .5rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem 0;
+  @media only screen and (max-width: $medium){
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &__title{
+    font-size: 1.6rem;
+    width: 90%;
+    overflow: hidden;
+    margin-right: 1rem;
+    @media only screen and (max-width: $medium){
+      width: 100%;
+    }
+  }
+
+  &__date{
+    font-size: 1.4rem;
+  }
+}

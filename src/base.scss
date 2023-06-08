@@ -1,3 +1,28 @@
+@import "reset.scss";
+//colors
+$lavender-light: #E6E6FAFF;
+$lavender-medium: #E1E1FAFF;
+$lavender-dark: #acacfc;
+$green-light: #ABFCCDFF;
+$green-medium: #8dfdb8;
+$green-dark: #5ae3a6;
+$pink-light: #f8bde4;
+$pink-medium: #f178c8;
+$gray: #7c7c83;
+$gray-light: #aeaeaf;
+$white: #ffffff;
+$error: #ff2424;
+$black: #000000;
+
+$lavender-green-gradient: linear-gradient(to right bottom, $green-light, $lavender-medium);
+
+//screen size
+$largest: 81.25em; //1400px
+$large: 75em; //1200
+$medium-large: 62.5em; //1000
+$medium: 50em; //800
+$small: 37.5em;//600
+
 *,
 *::before,
 *::after{
@@ -8,8 +33,14 @@
 
 html{
   box-sizing: border-box;
-  font-size: 62.5%; //10px
-}
+  font-size: 10px;
+  @media only screen and (max-width: $largest) {
+    font-size: 56.25%; //9px
+  }
+  @media only screen and (max-width: $small) {
+    font-size: 50%; //8px
+  }
+ }
 
 body{
   font-family: Arial, sans-serif;
@@ -20,3 +51,18 @@ body{
 .container{
   margin: 1.5rem;
 }
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLink{
+  &:visited, &:active{
+    color: black;
+  }
+}
+
+
+
