@@ -61,6 +61,14 @@ const getUserDataByToken = async (token) => await Server.get('/users/user', {
     }
 })
 
+const getDoctorPatientNumber = async (token) => {
+    const response = await Server.get('/users/patientNumber', {
+        headers: {
+            Authorization: token
+        }
+    })
+    return response.data.patientNumber
+}
 const getDoctors = async (clinic, clinicAddress, token, searchField= '', sortField = 'name') => await Server.get('/users/doctors',{
     headers: {
         Authorization: token
@@ -124,5 +132,6 @@ export {
     getDoctorPatients,
     getDoctorPatientById,
     getDailyPrescriptions,
-    changePrescriptionStatus
+    changePrescriptionStatus,
+    getDoctorPatientNumber
 }
