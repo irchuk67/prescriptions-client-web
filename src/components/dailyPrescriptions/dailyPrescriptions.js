@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {changePrescriptionIsReady, getDailyPrescriptionsList} from "../../redux/actions";
 import {changePrescriptionStatus} from "../../api";
 import './dailyPrescriptions.scss';
@@ -21,33 +21,30 @@ const renderPrescriptions = (prescriptions, onClick) => {
         }
     )
 }
-const DailyPrescriptions = (props) => {
+const DailyPrescriptions = () => {
+    const dailyPrescriptions = useSelector(state => state.dailyPrescriptions);
+    const dispatch = useDispatch();
     useEffect(() => {
         const getDailyPrescriptions = async () => {
-            return await props.getDailyPrescriptionsList(localStorage.getItem('token'))
+            return await dispatch(getDailyPrescriptionsList(localStorage.getItem('token')));
         }
         getDailyPrescriptions().catch(err => console.log(err))
     }, [])
 
     const onPrescriptionClick = async (prescriptionId) => {
         console.log(prescriptionId)
-        await props.changePrescriptionIsReady(
+        await dispatch(changePrescriptionIsReady(
             prescriptionId,
             localStorage.getItem('token')
-        )
+        ));
     }
 
     return(
         <div className={'daily-prescriptions'}>
             <h3 className={'daily-prescriptions__title'}>Daily prescriptions</h3>
-            {renderPrescriptions(props.dailyPrescriptions, onPrescriptionClick)}
+            {renderPrescriptions(dailyPrescriptions, onPrescriptionClick)}
         </div>
     )
 }
 
-const mapStateToProps = state => {
-    return{
-        dailyPrescriptions: state.dailyPrescriptions
-    }
-}
-export default connect(mapStateToProps, {getDailyPrescriptionsList, changePrescriptionIsReady})(DailyPrescriptions);
+export default DailyPrescriptions;

@@ -75,17 +75,14 @@ const renderFields = (userData) => {
 }
 
 const PatientAccount = (props) => {
+    const userData = JSON.parse(localStorage.getItem('currentUser'));
       return (
-        <Account userData={props.userData} backPath={'/patient/main'}>
-            {renderFields(props.userData)}
+        <Account userData={userData} backPath={'/patient/main'}>
+            {renderFields(userData)}
         </Account>
     )
 }
 
 
-const mapStateToProps = state => {
-    return {
-        userData: JSON.parse(localStorage.getItem('currentUser'))
-    }
-}
-export default connect(mapStateToProps)(PatientAccount);
+
+export default PatientAccount;

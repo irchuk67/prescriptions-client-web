@@ -7,7 +7,6 @@ import './patient.scss';
 import DoctorsList from "../../components/doctorsList/doctorsList";
 import PatientAccount from "./patientAccount";
 import HistoryOfPrescriptions from "../../components/HistoryOfPrescriptions/HistoryOfPrescriptions";
-import ListOfMedicines from "../../components/ListOfMedicines/ListOfMedicines";
 import DailyPrescriptions from "../../components/dailyPrescriptions/dailyPrescriptions";
 
 const Patient = () => {
@@ -37,9 +36,4 @@ const Patient = () => {
 }
 
 
-const mapStateToProps = state => {
-    return {
-        userData: state.currentUserData
-    }
-}
-export default connect(mapStateToProps)(Patient);
+export default Patient;

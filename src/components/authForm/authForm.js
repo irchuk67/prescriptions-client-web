@@ -6,7 +6,7 @@ import {useState} from "react";
 import userIcon from '../../assets/account.svg';
 import lock from '../../assets/lock-svgrepo-com 1.svg';
 import './authForm.scss';
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {closeAuthForm, getCurrentUserData, logIn, openRegisterForm} from "../../redux/actions";
 import {  useNavigate } from "react-router-dom";
 
@@ -38,19 +38,20 @@ const renderFields = (fields) => {
     )
 }
 
-const AuthForm = props => {
+const AuthForm = (props) => {
     const formFieldNames = ['email', 'password'];
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const onErrorClose = () => {
        setIsError(false)
     }
 
     const onNoAccountClick = () => {
-        props.closeAuthForm();
-        props.openRegisterForm();
+        dispatch(closeAuthForm());
+        dispatch(openRegisterForm());
     }
 
     const onSubmit = async (formValues) => {
@@ -60,8 +61,8 @@ const AuthForm = props => {
                 password: formValues.password
             }
 
-            await props.logIn(userToAuth);
-            await props.getCurrentUserData(localStorage.getItem('token'));
+            await dispatch(logIn(userToAuth));
+            await dispatch(getCurrentUserData(localStorage.getItem('token')));
             const role = JSON.parse(localStorage.getItem('currentUser')).role;
             if(localStorage.getItem('token') && localStorage.getItem('token') !== ''){
                 if(role === 'patient')
@@ -89,9 +90,10 @@ const AuthForm = props => {
             {isError &&
                 <ErrorMessage isOpen={isError}
                               onFormClose={onErrorClose}
-                              title={errorMessage}
+                              title={errorMessage ? errorMessage : "something wrong"}
                               onClose={onErrorClose}
                               buttonText={'Close'}
+                              onButtonClick={onErrorClose}
                 />}
         </div>
     )
@@ -114,12 +116,7 @@ const validate = (formValues) => {
     return errors;
 }
 
-const mapStateToProps = (state) => {
-    return{
-        token: state.token,
-    }
-}
-export default connect(mapStateToProps, {logIn, openRegisterForm, closeAuthForm, getCurrentUserData})(reduxForm({
+export default reduxForm({
     form: 'authForm',
     validate
-})(AuthForm));
+})(AuthForm);

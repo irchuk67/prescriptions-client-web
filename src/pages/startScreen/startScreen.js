@@ -2,21 +2,16 @@ import React from "react";
 import medicalPrescription from '../../assets/medical-prescription-svgrepo-com 1.svg';
 import Button from "../../components/button/button";
 import './startScreen.scss';
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import RegisterForm from "../../components/registerForm/registerForm";
 import {openAuthForm, closeAuthForm, openRegisterForm, closeRegisterForm} from "../../redux/actions";
 import AuthForm from "../../components/authForm/authForm";
-import {Navigate} from "react-router-dom";
 
-let startView = ({openAuthForm, closeAuthForm, openRegisterForm, closeRegisterForm}) => {
+let startView = () => {
+    const dispatch = useDispatch();
+    const onRegisterButtonClick = () => dispatch(openRegisterForm());
 
-    const onRegisterButtonClick = () => {
-        openRegisterForm();
-    }
-
-    const onAuthButtonClick = () => {
-        openAuthForm();
-    }
+    const onAuthButtonClick = () => dispatch(openAuthForm());
 
     return (
        <React.Fragment>
@@ -30,26 +25,20 @@ let startView = ({openAuthForm, closeAuthForm, openRegisterForm, closeRegisterFo
        </React.Fragment>
     )
 }
-let StartScreen = (props) => {
+let StartScreen = () => {
+    const isRegisterFormOpen = useSelector(state => state.isRegisterFormOpen.isOpen);
+    const isAuthFormOpen = useSelector(state => state.isAuthFormOpen.isOpen);
     return (
         <div className={'start'}>
             <div className={'start__col-1'}>
             </div>
             <div className={'start__col-2'}>
-                {!props.isAuthFormOpen && !props.isRegisterFormOpen ? startView(props) : null}
-                {!props.isAuthFormOpen && props.isRegisterFormOpen ? <RegisterForm/> : null}
-                {props.isAuthFormOpen && !props.isRegisterFormOpen ? <AuthForm/> : null}
+                {!isAuthFormOpen && !isRegisterFormOpen ? startView() : null}
+                {!isAuthFormOpen && isRegisterFormOpen ? <RegisterForm/> : null}
+                {isAuthFormOpen && !isRegisterFormOpen ? <AuthForm/> : null}
             </div>
         </div>
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        isRegisterFormOpen: state.isRegisterFormOpen.isOpen,
-        isAuthFormOpen: state.isAuthFormOpen.isOpen,
-        token: state.token,
-    }
-}
-
-export default connect(mapStateToProps, {openAuthForm, closeAuthForm, openRegisterForm, closeRegisterForm})(StartScreen);
+export default StartScreen;

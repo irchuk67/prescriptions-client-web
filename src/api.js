@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = 'http://ec2-3-84-6-237.compute-1.amazonaws.com:5000/api';
+const baseURL = 'http://ec2-107-23-15-27.compute-1.amazonaws.com:5000/api';
 const baseLocalhost = 'http://localhost:5000/api';
 const Server = axios.create({
     baseURL: baseURL
@@ -61,6 +61,14 @@ const getUserDataByToken = async (token) => await Server.get('/users/user', {
     }
 })
 
+const getDoctorPatientNumber = async (token) => {
+    const response = await Server.get('/users/patientNumber', {
+        headers: {
+            Authorization: token
+        }
+    })
+    return response.data.patientNumber
+}
 const getDoctors = async (clinic, clinicAddress, token, searchField= '', sortField = 'name') => await Server.get('/users/doctors',{
     headers: {
         Authorization: token
@@ -124,5 +132,6 @@ export {
     getDoctorPatients,
     getDoctorPatientById,
     getDailyPrescriptions,
-    changePrescriptionStatus
+    changePrescriptionStatus,
+    getDoctorPatientNumber
 }

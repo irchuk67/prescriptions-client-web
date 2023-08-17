@@ -3,23 +3,25 @@ import {deletePrescriptionById, getPrescriptions, getUserDataByToken} from "../.
 import PrescriptionItem from "../prescriptionItem/prescriptionItem";
 import './prescriptionsList.scss';
 import {Dialog, Alert, AlertTitle} from "@mui/material";
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {deletePrescriptionByID, getAllPrescriptions, openUpdateForm} from "../../redux/actions";
 
-const PrescriptionsList = (props) => {
+const PrescriptionsList = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const prescriptions = useSelector(state => state.receipts);
+    const dispatch = useDispatch();
 
     const handleClose = () => {
         setIsDialogOpen(!isDialogOpen)
     }
 
-    const onPrescriptionDelete = (id) => props.deletePrescriptionByID(id);
+    const onPrescriptionDelete = (id) => dispatch(deletePrescriptionByID(id));
 
-    const receiptList = props.receipts.map(prescription => {
+    const receiptList = prescriptions.map(prescription => {
         return (<PrescriptionItem key={prescription.id}
-                     prescriptionData={prescription}
-                     onItemDelete={onPrescriptionDelete}
-                     id={prescription.id}
+                                  prescriptionData={prescription}
+                                  onItemDelete={onPrescriptionDelete}
+                                  id={prescription.id}
         />)
     });
 
@@ -40,11 +42,4 @@ const PrescriptionsList = (props) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        receipts: state.receipts,
-        token: state.token
-    }
-}
-
-export default connect(mapStateToProps, {getAllPrescriptions: getAllPrescriptions, deletePrescriptionByID, openUpdateForm})(PrescriptionsList);
+export default PrescriptionsList;

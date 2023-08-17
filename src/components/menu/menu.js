@@ -1,18 +1,19 @@
 import React from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {closeMenu, openMenu} from "../../redux/actions";
 import './menu.scss';
 
-const Menu = ({isMenuOpen, openMenu, closeMenu}) => {
+const Menu = () => {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const isMenuOpen = useSelector(state => state.isMenuOpen.isOpen);
     const onMenuClick = () => {
         {isMenuOpen
             ?
-            closeMenu()
+            dispatch(closeMenu())
             :
-            openMenu()
+            dispatch(openMenu())
         }
     }
 
@@ -20,12 +21,12 @@ const Menu = ({isMenuOpen, openMenu, closeMenu}) => {
 
     const onHistoryOfPrescriptionsOpen = () => {
         navigate('/patient/main/history');
-        closeMenu();
+        dispatch(closeMenu());
     }
 
     const onDoctorsOpen = () => {
         navigate('/patient/main/doctors');
-        closeMenu();
+        dispatch(closeMenu());
     }
     return (
         <div className={className}>

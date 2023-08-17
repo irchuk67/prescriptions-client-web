@@ -1,16 +1,17 @@
 import DialogForm from "../dialog-form/dialog-form";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addNewPrescription, closeAddForm} from "../../redux/actions";
 import React, {useState} from "react";
 import PrescriptionForm from "../prescriptionForm/prescriptionForm";
 import ErrorMessage from "../errorMessage/errorMessage";
 
-const AddPrescription = (props) => {
+const AddPrescription = () => {
     const path = window.location.pathname.split('/');
     const assigneeId = path[path.length - 1];
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
+    const isOpen = useSelector(state => state.isAddFormOpen);
+    const dispatch = useDispatch();
     const onErrorClose = () => {
         setIsError(false);
     }
@@ -20,8 +21,7 @@ const AddPrescription = (props) => {
     }
 
     const onFormSubmit = async (formValues) => {
-        console.log(formValues)
-        try{
+        try {
             const prescription = {
                 title: formValues.title,
                 description: formValues.description,
@@ -33,9 +33,9 @@ const AddPrescription = (props) => {
                 isReady: false,
                 medicines: formValues.medicines
             }
-            await props.addNewPrescription(prescription, localStorage.getItem('token'), assigneeId)
-            props.closeAddForm();
-        }catch (err){
+            await dispatch(addNewPrescription(prescription, localStorage.getItem('token'), assigneeId));
+            dispatch(closeAddForm());
+        } catch (err) {
             setIsError(true);
             setErrorMessage(err.response.data)
         }
@@ -47,13 +47,13 @@ const AddPrescription = (props) => {
                 title={'Add new prescription'}
                 buttonText={'Create'}
                 onSubmitPrescription={onFormSubmit}
-                isOpen={props.isOpen}
-                onClose={props.closeAddForm}
+                isOpen={isOpen}
+                onClose={() => dispatch(closeAddForm())}
             />
             {isError &&
                 <ErrorMessage isOpen={isError}
                               onFormClose={onErrorClose}
-                              title={errorMessage}
+                              title={errorMessage && 'something wrong'}
                               buttonText={'Close'}
                               onClose={onErrorClose}
                               onButtonClick={onErrorButtonClick}
@@ -63,10 +63,4 @@ const AddPrescription = (props) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        isOpen: state.isAddFormOpen,
-        receipts: state.receipts
-    }
-}
-export default connect(mapStateToProps, {addNewPrescription, closeAddForm})(AddPrescription);
+export default AddPrescription;

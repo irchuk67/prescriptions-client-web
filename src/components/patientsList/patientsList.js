@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './patientsList.scss';
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {getPatientsListForDoctor} from "../../redux/actions";
 import search from "../../assets/icons8-search 1.svg";
 import sort from "../../assets/filter 1.svg";
@@ -32,10 +32,11 @@ const PatientsList = (props) => {
     const [isSortOpen, setIsSortOpen] = useState(false);
     const sortFields = ['name', 'surname', 'last Prescription Date'];
     const [sortField, setSortField] = useState('');
-
+    const dispatch = useDispatch();
+    const patients = useSelector(state => state.patients);
     useEffect(() => {
         const getPatients = async () => {
-            return await props.getPatientsListForDoctor(localStorage.getItem('token'))
+            return await dispatch(getPatientsListForDoctor(localStorage.getItem('token')));
         }
         getPatients().catch(err => console.log(err))
     }, []);
@@ -47,7 +48,7 @@ const PatientsList = (props) => {
 
     const onSearchSubmit = async (event) => {
         event.preventDefault();
-        await props.getPatientsListForDoctor(localStorage.getItem('token'), patientSearch);
+        await dispatch(getPatientsListForDoctor(localStorage.getItem('token'), patientSearch));
         setPatientSearch('')
     }
 
@@ -57,14 +58,14 @@ const PatientsList = (props) => {
 
     const onSortFieldSelect = async (event) => {
         event.preventDefault()
-        await props.getPatientsListForDoctor(localStorage.getItem('token'), patientSearch, sortField);
+        await dispatch(getPatientsListForDoctor(localStorage.getItem('token'), patientSearch, sortField));
         setIsSortOpen(false)
     }
 
 
     const navigate = useNavigate();
     const OnPatientClick = (patientId) => {
-        const currentPatient = props.patients.filter(patient => patient.userId === patientId)[0];
+        const currentPatient = patients.filter(patient => patient.userId === patientId)[0];
         localStorage.setItem('currentPatient', JSON.stringify(currentPatient));
         navigate(`/doctor/main/${patientId}`)
     }
@@ -85,17 +86,11 @@ const PatientsList = (props) => {
                         <p className="sort__heading">Sort patients</p>
                         <img src={sort} alt={'sort icon'}/>
                     </div>
-                    {patientItems(props.patients, OnPatientClick)}
+                    {patientItems(patients, OnPatientClick)}
                 </div>
             }
         </React.Fragment>
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        patients: state.patients
-    }
-}
-
-export default connect(mapStateToProps, {getPatientsListForDoctor})(PatientsList);
+export default PatientsList;

@@ -3,7 +3,7 @@ import {Fields, formValueSelector, reduxForm} from "redux-form";
 import Button from "../button/button";
 import '../dialog-form/dialog-form.scss';
 import './registerForm.scss';
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {closeRegisterForm, openAuthForm} from "../../redux/actions";
 import {createNewUser} from "../../api";
 import validate from "./validate";
@@ -19,6 +19,8 @@ import ErrorMessage from "../errorMessage/errorMessage";
 
 
 let registerForm = (props) => {
+    const dispatch = useDispatch();
+    const role = useSelector(state => state.role);
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const formFieldNames = [
@@ -58,8 +60,8 @@ let registerForm = (props) => {
 
             }
             await createNewUser(userToCreate);
-            props.closeRegisterForm();
-            props.openAuthForm();
+            dispatch(closeRegisterForm());
+            dispatch(openAuthForm());
         }catch (err){
             setIsError(true);
             setErrorMessage(err.response.data)
@@ -71,16 +73,16 @@ let registerForm = (props) => {
     }
 
     const onErrorButtonClick = () => {
-        props.closeRegisterForm();
-        props.openAuthForm();
+        dispatch(closeRegisterForm());
+        dispatch(openAuthForm());
     }
     return (
         <div className={'register'}>
             <form onSubmit={props.handleSubmit(onFormSubmit)}>
                 <Fields names={formFieldNames[0]} component={renderPersonalFields}/>
                 <Fields names={formFieldNames[1]} component={renderRoleFields}/>
-                {props.role === 'patient' && <Fields names={formFieldNames[2]} component={renderPatientParamsFields}/>}
-                {props.role === 'doctor' && <Fields names={formFieldNames[3]} component={renderDoctorSpecialisation}/>}
+                {role === 'patient' && <Fields names={formFieldNames[2]} component={renderPatientParamsFields}/>}
+                {role === 'doctor' && <Fields names={formFieldNames[3]} component={renderDoctorSpecialisation}/>}
                 <Fields names={formFieldNames[4]} component={renderClinicFields}/>
                 <Fields names={formFieldNames[5]} component={renderIdentificationFields}/>
                 <div className={'new-form__buttons register__buttons'}>
@@ -88,14 +90,14 @@ let registerForm = (props) => {
                     <Button className={'button button__white button__white--gray register__button'}
                             onButtonClick={(event) => {
                                 event.preventDefault();
-                                props.closeRegisterForm()
+                                dispatch(closeRegisterForm());
                             }}>Cancel</Button>
                 </div>
             </form>
             {isError &&
                 <ErrorMessage isOpen={isError}
                               onFormClose={onErrorClose}
-                              title={errorMessage}
+                              title={errorMessage ? errorMessage : "something wrong"}
                               onClose={onErrorClose}
                               onButtonClick={onErrorButtonClick}
                               buttonText={'Log in'}
@@ -109,11 +111,5 @@ registerForm = reduxForm({
     validate,
     destroyOnUnmount: false
 })(registerForm)
-
-const selector = formValueSelector('registerForm');
-registerForm = connect(state => {
-    const role = selector(state, 'role');
-    return {role}
-}, {closeRegisterForm, openAuthForm})(registerForm)
 
 export default registerForm;

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {getDoctorsList} from "../../redux/actions";
 import user from '../../assets/account.svg';
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import './doctorsList.scss';
 import Button from "../button/button";
 import sort from '../../assets/filter 1.svg';
@@ -29,18 +29,20 @@ const renderDoctors = (doctors, assignedDoctorsLocal, onClick) => {
     })
 }
 
-const DoctorsList = (props) => {
+const DoctorsList = () => {
     const [doctorSearch, setDoctorSearch] = useState('');
     const [isSortOpen, setIsSortOpen] = useState(false);
     const sortFields = ['name', 'surname', 'specialisation'];
     const [sortField, setSortField] = useState('');
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const [assignedDoctorsLocal, setAssignedDoctorsLocal] = useState([...currentUser.assignedDoctors])
+    const doctors = useSelector(state => state.doctors);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const getDoctors = async () => {
             const {clinic, clinicAddress} = currentUser;
-            return await props.getDoctorsList(clinic, clinicAddress, localStorage.getItem('token'))
+            return await dispatch(getDoctorsList(clinic, clinicAddress, localStorage.getItem('token')));
         }
         getDoctors().catch(err => console.log(err))
     }, []);
@@ -57,14 +59,14 @@ const DoctorsList = (props) => {
     const onSortFieldSelect = async (event) => {
         event.preventDefault()
         const {clinic, clinicAddress} = JSON.parse(localStorage.getItem('currentUser'));
-        await props.getDoctorsList(clinic, clinicAddress, localStorage.getItem('token'), doctorSearch, sortField);
+        await dispatch(getDoctorsList(clinic, clinicAddress, localStorage.getItem('token'), doctorSearch, sortField));
         setIsSortOpen(false)
     }
 
     const onSearchSubmit = async (event) => {
         event.preventDefault();
         const {clinic, clinicAddress} = JSON.parse(localStorage.getItem('currentUser'));
-        await props.getDoctorsList(clinic, clinicAddress, localStorage.getItem('token'), doctorSearch, sortField);
+        await dispatch(getDoctorsList(clinic, clinicAddress, localStorage.getItem('token'), doctorSearch, sortField));
         setDoctorSearch('')
     }
 
@@ -99,17 +101,12 @@ const DoctorsList = (props) => {
                         <p className="sort__heading">Sort doctors</p>
                         <img src={sort}/>
                     </div>
-                    {renderDoctors(props.doctors, assignedDoctorsLocal, onDoctorClick)}
+                    {renderDoctors(doctors, assignedDoctorsLocal, onDoctorClick)}
                 </div>
             }
         </React.Fragment>
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        doctors: state.doctors
-    }
-}
 
-export default connect(mapStateToProps, {getDoctorsList})(DoctorsList);
+export default DoctorsList;

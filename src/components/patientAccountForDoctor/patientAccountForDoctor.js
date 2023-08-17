@@ -5,7 +5,7 @@ import weight from "../../assets/weight-scale 1.svg";
 import callendar from "../../assets/callendar.svg";
 import {formatDate} from "../../format";
 import gender from "../../assets/gender 1.svg";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 
 const renderFields = (userData) => {
     return (
@@ -44,18 +44,13 @@ const renderFields = (userData) => {
         </React.Fragment>
     )
 }
-const PatientAccountForDoctor = (props) => {
-    console.log(props.userData)
+const PatientAccountForDoctor = () => {
+    const userData = useSelector(state => state.viewedPatient)
     return(
-        <Account userData={props.userData} backPath={`/doctor/main/${props.userData.userId}`}>
-            {renderFields(props.userData)}
+        <Account userData={userData} backPath={`/doctor/main/${userData.userId}`}>
+            {renderFields(userData)}
         </Account>
     )
 }
 
-const mapStateToProps = state => {
-    return{
-        userData: state.viewedPatient
-    }
-}
-export default connect(mapStateToProps)(PatientAccountForDoctor)
+export default PatientAccountForDoctor;

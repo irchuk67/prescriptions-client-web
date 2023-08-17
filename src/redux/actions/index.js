@@ -137,7 +137,6 @@ const getDoctorsList = (clinic, clinicAddress, token, searchField, sortField) =>
 //doctor
 const getPatientsListForDoctor = (token, searchField, sortField) => async dispatch => {
     const patients = await getDoctorPatients(token, searchField, sortField);
-    console.log(patients.data)
     dispatch({
             type: GET_PATIENTS_LIST_FOR_DOCTOR,
             payload: patients.data

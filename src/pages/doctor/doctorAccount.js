@@ -9,9 +9,8 @@ import patientsList from "../../assets/patient-svgrepo-com 1.svg";
 import {NavLink} from "react-router-dom";
 import logOutIMG from "../../assets/log-out-outlined-svgrepo-com 1.svg";
 
-const renderFields = () => {
+const renderFields =  (patientAmount) => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
     return (
         <React.Fragment>
             <div className={'account__field'}>
@@ -42,7 +41,7 @@ const renderFields = () => {
                     <img className={'account__field--img'} src={patientsList} alt={'patient list'}/>
                     <p className={'account__field--name'}>Number of patients: </p>
                 </div>
-                <p className={'account__field--value'}>10</p>
+                <p className={'account__field--value'}>{patientAmount}</p>
             </div>
             <div className={'account__field'}>
                 <div className={'account__field--naming'}>
@@ -55,19 +54,14 @@ const renderFields = () => {
     )
 }
 
-const DoctorAccount = (props) => {
-
+const DoctorAccount = ({patientAmount}) => {
+    const userData = JSON.parse(localStorage.getItem('currentUser'));
     return (
-        <Account userData={props.userData} backPath={'/doctor/main'}>
-            {renderFields(props.userData)}
+        <Account userData={userData} backPath={'/doctor/main'}>
+            {renderFields(patientAmount)}
         </Account>
     )
 }
 
 
-const mapStateToProps = state => {
-    return {
-        userData: JSON.parse(localStorage.getItem('currentUser'))
-    }
-}
-export default connect(mapStateToProps)(DoctorAccount);
+export default DoctorAccount;

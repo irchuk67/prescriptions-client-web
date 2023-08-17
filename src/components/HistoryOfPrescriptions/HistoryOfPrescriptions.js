@@ -1,7 +1,7 @@
 import {NavLink} from "react-router-dom";
 import Button from "../button/button";
 import React, {useEffect} from "react";
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {getAllPrescriptions} from "../../redux/actions";
 import './HistoryOfPrescriptions.scss';
 import {formatDate} from "../../format";
@@ -19,11 +19,14 @@ const renderPrescriptions = (prescriptions) => {
 
     )
 }
-const HistoryOfPrescriptions = (props) => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+const HistoryOfPrescriptions = () => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const prescriptions = useSelector(state => state.receipts);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         const getPrescriptions = async () => {
-            return await props.getAllPrescriptions(localStorage.getItem('token'), currentUser.userId);
+            return await dispatch(getAllPrescriptions(localStorage.getItem('token'), currentUser.userId));
         }
         getPrescriptions().catch(err => console.log(err))
     }, [])
@@ -34,15 +37,9 @@ const HistoryOfPrescriptions = (props) => {
                 <NavLink to={'/patient/main'}>
                     <Button className={'button button__green history__button'}>Go to daily receipts</Button></NavLink>
             </div>
-            {renderPrescriptions(props.prescriptions)}
+            {renderPrescriptions(prescriptions)}
         </div>
     )
 }
 
-const mapStateToProps = state => {
-    return{
-        prescriptions: state.receipts
-    }
-}
-
-export default connect(mapStateToProps, {getAllPrescriptions})(HistoryOfPrescriptions);
+export default HistoryOfPrescriptions;
