@@ -1,7 +1,6 @@
 import {Fields, reduxForm} from "redux-form";
 import Button from "../button/button";
 import ErrorMessage from "../errorMessage/errorMessage";
-import React, {Component} from "react";
 import {useState} from "react";
 import userIcon from '../../assets/account.svg';
 import lock from '../../assets/lock-svgrepo-com 1.svg';

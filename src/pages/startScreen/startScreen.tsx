@@ -1,14 +1,15 @@
 import React from "react";
-import medicalPrescription from '../../assets/medical-prescription-svgrepo-com 1.svg';
+import medicalPrescription from "../../assets/medical-prescription-svgrepo-com 1.png";
 import Button from "../../components/button/button";
 import './startScreen.scss';
-import {connect, useDispatch, useSelector} from "react-redux";
 import RegisterForm from "../../components/registerForm/registerForm";
-import {openAuthForm, closeAuthForm, openRegisterForm, closeRegisterForm} from "../../redux/actions";
 import AuthForm from "../../components/authForm/authForm";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {open as openRegisterForm} from "../../redux/slices/registerFormSlice";
+import {open as openAuthForm} from "../../redux/slices/authFormSlice";
 
 let startView = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const onRegisterButtonClick = () => dispatch(openRegisterForm());
 
     const onAuthButtonClick = () => dispatch(openAuthForm());
@@ -25,9 +26,9 @@ let startView = () => {
        </React.Fragment>
     )
 }
-let StartScreen = () => {
-    const isRegisterFormOpen = useSelector(state => state.isRegisterFormOpen.isOpen);
-    const isAuthFormOpen = useSelector(state => state.isAuthFormOpen.isOpen);
+const StartScreen = () => {
+    const isRegisterFormOpen = useAppSelector(state => state.registerForm.isOpen);
+    const isAuthFormOpen = useAppSelector(state => state.authForm.isOpen);
     return (
         <div className={'start'}>
             <div className={'start__col-1'}>

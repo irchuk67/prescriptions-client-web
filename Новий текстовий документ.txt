@@ -1,0 +1,7 @@
+(cd task-service && npm start&) & (cd user-service && npm start&) & (cd api-gateway && npm start&) & (cd prescriptions-server && npm start&)
+
+cd /etc
+sudo nano enviroment
+MONGODB_URI_USERS=mongodb+srv://receipts:receipts@cluster0.kkfjbu2.mongodb.net/users?retryWrites=true&w=majority
+MONGODB_URI_PRESCRIPTIONS=mongodb+srv://receipts:receipts@cluster0.kkfjbu2.mongodb.net/prescriptions?retryWrites=true&w=majority
+MONGODB_URI_TASKS=mongodb+srv://receipts:receipts@cluster0.kkfjbu2.mongodb.net/tasks?retryWrites=true&w=majority
